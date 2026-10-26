@@ -4,7 +4,7 @@
   docs/assets/<name>-light.svg
   docs/assets/<name>-dark.svg
 
-House diagram kit (canonical copy: ~/.claude/skills/new-repo/assets/gen_diagram.py,
+House diagram kit (canonical copy kept in the owner standards repo,
 first built for InkFrame-Immich). The engine below the "diagrams" line is shared
 verbatim across repos; only the diagram functions and DIAGRAMS change per repo.
 
@@ -233,12 +233,12 @@ def architecture(scheme):
     rows = 5
     tx, ty = XS[1], TOP
     th = rows * H + (rows - 1) * (PITCH - H)
-    ay = ty + th + 72                       # Anthropic, under the task
+    ay = ty + th + 72                       # AI API, under the task
     k = Canvas(1180, ay + H + 26 + 52, scheme,
                "Five EventBridge rules run one ECS Fargate task that pulls its image from ECR, "
                "keeps secrets and the run lock in SSM, caches AI decisions in S3, logs to "
                "CloudWatch with SNS failure alerts, reads and writes Jamf Pro and Snipe-IT, "
-               "only reads Azure AD and HiBob, reports to Slack and asks the Anthropic API "
+               "only reads Azure AD and HiBob, reports to Slack and asks an optional AI API "
                "about ambiguous matches.")
     c = k.c
     left = [
@@ -298,7 +298,7 @@ def architecture(scheme):
                          colour=c["on_accent"], font=MONO))
         y += 21 + len(lines) * 19 + 16
 
-    k.add(k.box(tx, ay, W, H, "Anthropic API",
+    k.add(k.box(tx, ay, W, H, "AI API (optional)",
                 ["resolves ambiguous matches,", "runs the weekly ai-audit"], icon="sparkle"),
           k.edge([(tx + W / 2, ty + th + 8), (tx + W / 2, ay - 8)]),
           k.text(tx + W / 2 + 14, (ty + th + ay) / 2 + 4, "ambiguous matches",

@@ -97,4 +97,6 @@ terraform/environments/prod/.terraform/
 *.tfvars
 backend.hcl
 !backend.hcl.example
-.claude/
+
+# Screenshot environment (make screenshots)
+.venv-screenshots/

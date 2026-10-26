@@ -64,4 +64,4 @@ mark_contractors         = true
 alarm_email = ""
 
 # Shared SNS topic that receives failed scheduled-task alerts (empty = disabled)
-alerts_topic_arn = "" # e.g. "arn:aws:sns:eu-west-1:123456789012:techops-alerts"
+alerts_topic_arn = "" # e.g. "arn:aws:sns:eu-west-1:123456789012:platform-alerts"
