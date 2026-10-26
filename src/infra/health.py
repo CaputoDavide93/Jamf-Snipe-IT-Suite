@@ -77,16 +77,6 @@ class HealthCheckServer:
         self._thread: Optional[threading.Thread] = None
         self._custom_health_checks: Dict[str, Callable[[], bool]] = {}
     
-    def register_health_check(self, name: str, check_fn: Callable[[], bool]):
-        """
-        Register a custom health check function.
-        
-        Args:
-            name: Name of the health check
-            check_fn: Function that returns True if healthy, False otherwise
-        """
-        self._custom_health_checks[name] = check_fn
-    
     def update_status(self, **kwargs):
         """Update health status fields."""
         for key, value in kwargs.items():
@@ -170,7 +160,7 @@ class HealthCheckServer:
         lines = [
             "# HELP jamf_snipeit_up Service is up and running",
             "# TYPE jamf_snipeit_up gauge",
-            f"jamf_snipeit_up 1",
+            "jamf_snipeit_up 1",
             "",
             "# HELP jamf_snipeit_uptime_seconds Time since service started",
             "# TYPE jamf_snipeit_uptime_seconds counter",
@@ -384,7 +374,7 @@ if __name__ == "__main__":
     server.record_run(success=False, module_name="model_sync")
     
     print("\nHealth server running. Press Ctrl+C to stop.")
-    print(f"Test with: curl http://localhost:8080/status")
+    print("Test with: curl http://localhost:8080/status")
     
     # Keep running
     while True:

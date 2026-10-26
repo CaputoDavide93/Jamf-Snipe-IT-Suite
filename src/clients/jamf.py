@@ -613,95 +613,9 @@ class JamfClient:
         logger.error(f"Failed to send redeploy command to computer {computer_id}")
         return None
     
-    def redeploy_batch(
-        self, computer_ids: List[int], stop_on_error: bool = False
-    ) -> Dict[str, Any]:
-        """
-        Send redeploy command to multiple computers.
-        
-        Args:
-            computer_ids: List of computer IDs
-            stop_on_error: Stop processing on first error
-        
-        Returns:
-            Results dictionary with success/failure counts
-        """
-        results = {
-            "total": len(computer_ids),
-            "successful": 0,
-            "failed": 0,
-            "details": [],
-        }
-        
-        for computer_id in computer_ids:
-            try:
-                result = self.redeploy_management_framework(computer_id)
-                if result:
-                    results["successful"] += 1
-                    results["details"].append({
-                        "computer_id": computer_id,
-                        "status": "success",
-                        "command_uuid": result.get("commandUuid"),
-                    })
-                else:
-                    raise RuntimeError("No response received")
-            except Exception as e:
-                results["failed"] += 1
-                results["details"].append({
-                    "computer_id": computer_id,
-                    "status": "failed",
-                    "error": str(e),
-                })
-                if stop_on_error:
-                    logger.error("Stopping batch due to error")
-                    break
-        
-        logger.info(
-            f"Batch complete: {results['successful']} successful, {results['failed']} failed"
-        )
-        return results
-    
     # =========================================================================
     # Utility Methods
     # =========================================================================
-    
-    def extract_user_info(self, computer_data: Dict[str, Any]) -> Dict[str, Optional[str]]:
-        """
-        Extract user/location info from computer data.
-        Handles multiple API response formats.
-        
-        Args:
-            computer_data: Computer dictionary from API
-        
-        Returns:
-            Dictionary with username, full_name, email, position
-        """
-        user_info = {
-            "username": None,
-            "full_name": None,
-            "email": None,
-            "position": None,
-        }
-        
-        # Try v2 API format
-        if "userAndLocation" in computer_data:
-            loc = computer_data["userAndLocation"]
-            user_info["username"] = loc.get("username")
-            user_info["full_name"] = loc.get("realName")
-            user_info["email"] = loc.get("email")
-            user_info["position"] = loc.get("position")
-        
-        # Try Classic API format
-        elif "location" in computer_data:
-            loc = computer_data["location"]
-            user_info["username"] = loc.get("username")
-            user_info["full_name"] = (
-                loc.get("real_name") or loc.get("realName") or loc.get("realname")
-            )
-            user_info["email"] = loc.get("email_address") or loc.get("email")
-            user_info["position"] = loc.get("position")
-        
-        return user_info
     
     def close(self) -> None:
         """Close the session."""

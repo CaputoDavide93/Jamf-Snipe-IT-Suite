@@ -298,52 +298,6 @@ class SnipeITClient:
         logger.debug(f"No Snipe user found for email: {email}")
         return None
     
-    def find_user_by_username(self, username: str) -> Optional[Dict[str, Any]]:
-        """
-        Find a user by username (searches username field and email prefix).
-        Uses strict normalized matching to avoid false positives.
-        
-        Args:
-            username: Username to search (e.g., 'lewistowart' or 'lewis.towart')
-        
-        Returns:
-            User dictionary or None
-        """
-        if not username or len(username) < 3:
-            return None
-        
-        # Normalize the search username for comparison
-        search_norm = username.lower().strip().replace(".", "").replace("_", "").replace("-", "")
-        
-        # Try searching with the username directly
-        response = self._request("GET", "/users", params={"search": username, "limit": 50})
-        if not response:
-            return None
-        
-        data = response.json()
-        
-        for user in data.get("rows", []):
-            # Check username match (normalized)
-            snipe_username = (user.get("username") or "").lower()
-            snipe_username_norm = snipe_username.replace(".", "").replace("_", "").replace("-", "")
-            
-            # Remove domain from username if present
-            if "@" in snipe_username_norm:
-                snipe_username_norm = snipe_username_norm.split("@")[0]
-            
-            # Check email prefix match (normalized)
-            snipe_email = (user.get("email") or "").lower()
-            snipe_email_prefix = snipe_email.split("@")[0] if "@" in snipe_email else ""
-            snipe_email_norm = snipe_email_prefix.replace(".", "").replace("_", "").replace("-", "")
-            
-            # STRICT match: require exact normalized match (not substring!)
-            if search_norm == snipe_username_norm or search_norm == snipe_email_norm:
-                logger.debug(f"Found Snipe user by username {username}: id={user.get('id')}, name={user.get('name')}")
-                return user
-        
-        logger.debug(f"No Snipe user found for username: {username}")
-        return None
-    
     def get_user_by_id(self, user_id: int) -> Optional[Dict[str, Any]]:
         """
         Get user details by ID.
@@ -432,19 +386,6 @@ class SnipeITClient:
             logger.warning(f"create_user returned non-success status: {result.get('status')} — {result.get('messages', '')}")
         return None
 
-    def delete_user(self, user_id: int) -> bool:
-        """
-        Delete a user from Snipe-IT.
-
-        Args:
-            user_id: Snipe-IT user ID
-
-        Returns:
-            True if successfully deleted
-        """
-        response = self._request("DELETE", f"/users/{user_id}")
-        return response is not None and response.status_code in (200, 204)
-    
     # =========================================================================
     # Asset/Hardware Operations
     # =========================================================================
@@ -536,35 +477,6 @@ class SnipeITClient:
         
         logger.debug(f"Built serial map with {len(serial_map)} entries")
         return serial_map
-    
-    def search_assets(
-        self,
-        search: str = "",
-        status: str = "",
-        limit: int = 50,
-    ) -> List[Dict[str, Any]]:
-        """
-        Search for assets.
-        
-        Args:
-            search: Search term
-            status: Filter by status
-            limit: Maximum results
-        
-        Returns:
-            List of asset dictionaries
-        """
-        params = {"limit": limit}
-        if search:
-            params["search"] = search
-        if status:
-            params["status"] = status
-        
-        response = self._request("GET", "/hardware", params=params)
-        if not response:
-            return []
-        
-        return response.json().get("rows", [])
     
     def next_cf_tag(self) -> str:
         """
@@ -889,15 +801,6 @@ class SnipeITClient:
     # =========================================================================
     # Category Operations
     # =========================================================================
-    
-    def get_all_categories(self) -> List[Dict[str, Any]]:
-        """
-        Get all categories from Snipe-IT.
-        
-        Returns:
-            List of category dictionaries
-        """
-        return self._paginated_rows("/categories")
     
     # =========================================================================
     # Utility Methods

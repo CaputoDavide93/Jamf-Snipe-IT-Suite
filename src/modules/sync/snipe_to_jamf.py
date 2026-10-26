@@ -8,7 +8,6 @@ SnipeIT_Asset_ID EA so Jamf knows which Snipe-IT asset record corresponds to
 each computer.
 """
 import logging
-import time
 from typing import Any, Dict, List, Optional
 
 from core.config import Config
@@ -103,7 +102,6 @@ class SnipeToJamfModule:
         # This avoids expensive individual jamf.get_computer_by_serial() calls
         # for devices that User Match has already populated.
         filtered = []
-        skipped_prefilter = 0
         for comp in computers:
             serial = comp.get("serial_number", "").strip()
             if not serial:
@@ -151,20 +149,6 @@ class SnipeToJamfModule:
         self._print_summary(results, dry_run)
         
         return results
-    
-    def run_single(self, serial_number: str, dry_run: bool = False) -> bool:
-        """
-        Sync a single computer by serial number.
-        
-        Args:
-            serial_number: Computer serial number
-            dry_run: If True, don't make changes
-        
-        Returns:
-            True if updated successfully
-        """
-        logger.debug(f"Syncing single computer: {serial_number}")
-        return self._sync_single_computer(serial_number, dry_run)
     
     def _sync_single_computer(self, serial: str, dry_run: bool) -> bool:
         """

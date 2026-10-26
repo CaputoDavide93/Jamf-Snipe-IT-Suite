@@ -902,7 +902,7 @@ def main():
 
     # Start health server
     try:
-        health_server = start_health_server(port=8080)
+        start_health_server(port=8080)
         logger.info("Health server: :8080")
     except Exception as e:
         logger.warning(f"Health server failed: {e}")

@@ -205,10 +205,3 @@ class MonthlyDigestModule:
     def close(self) -> None:
         pass
 
-
-def run_monthly_digest(config: Config, dry_run: bool = False) -> Dict[str, Any]:
-    m = MonthlyDigestModule(config)
-    try:
-        return m.run(dry_run=dry_run)
-    finally:
-        m.close()

@@ -137,7 +137,7 @@ figure{{display:flex;flex-direction:column;align-items:center;gap:12px}} figcapt
     # first pass to measure height
     with tempfile.TemporaryDirectory() as td:
         p = pathlib.Path(td) / "m.html"; p.write_text(doc + '<script>document.title=document.documentElement.scrollHeight</script>')
-        out = subprocess.run([CHROME, "--headless=new", "--disable-gpu", "--no-sandbox", f"--window-size=1900,800",
+        out = subprocess.run([CHROME, "--headless=new", "--disable-gpu", "--no-sandbox", "--window-size=1900,800",
                               "--virtual-time-budget=2000", "--dump-dom", f"file://{p}"], capture_output=True, text=True).stdout
     import re
     h = int(re.search(r"<title>(\d+)</title>", out).group(1))

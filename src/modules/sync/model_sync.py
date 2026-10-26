@@ -4,8 +4,7 @@ Syncs model metadata from Jamf to Snipe-IT.
 Auto-creates models and manufacturers as needed.
 """
 import logging
-import time
-from typing import Any, Dict, List, Optional, Set
+from typing import Any, Dict, Optional, Set
 
 from core.config import Config
 from clients.jamf import JamfClient
@@ -402,7 +401,6 @@ class ModelSyncModule:
             hardware = jamf_comp.get("hardware", {}) or {}
 
         model_name = hardware.get("model", "")
-        model_identifier = hardware.get("model_identifier", "")
 
         if not model_name:
             return False

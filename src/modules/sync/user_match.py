@@ -5,9 +5,8 @@ Auto-provisions Snipe-IT assets from Jamf and matches users.
 import json
 import logging
 import os
-import time
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional
 
 from core.config import Config
 from core.client_factory import create_jamf_client, create_snipeit_client, create_slack_client, load_user_overrides
@@ -680,7 +679,7 @@ class UserMatchModule:
                     primary_username=primary_username,
                     asset_id=str(asset.get('id')),
                     action="skip", result="skipped",
-                    notes=f"Asset in pending status (set by Leavers)"
+                    notes="Asset in pending status (set by Leavers)"
                 )
                 return
             

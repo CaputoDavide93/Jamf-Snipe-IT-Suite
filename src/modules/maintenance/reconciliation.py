@@ -9,7 +9,7 @@ import csv
 import logging
 import os
 from datetime import datetime
-from typing import Dict, List, Optional, Set, Tuple
+from typing import Dict, List
 from dataclasses import dataclass, field
 from collections import defaultdict
 
@@ -367,24 +367,6 @@ class ReconciliationModule:
         if r.snipe_only:
             for asset in r.snipe_only[:5]:
                 logger.info(f"  Snipe-only: {asset['serial']}: {asset['name']}")
-    
-    def get_summary_dict(self) -> Dict:
-        """Get summary as a dictionary (useful for API responses)."""
-        return {
-            'timestamp': self.results.scan_timestamp,
-            'total_jamf': self.results.total_jamf,
-            'total_snipe': self.results.total_snipe,
-            'matched': len(self.results.matched),
-            'jamf_only': len(self.results.jamf_only),
-            'snipe_only': len(self.results.snipe_only),
-            'jamf_duplicates': len(self.results.jamf_duplicates),
-            'snipe_duplicates': len(self.results.snipe_duplicates),
-            'data_mismatches': len(self.results.data_mismatches),
-            'health': 'ok' if (len(self.results.jamf_only) == 0 and 
-                              len(self.results.snipe_only) == 0 and
-                              len(self.results.jamf_duplicates) == 0 and
-                              len(self.results.snipe_duplicates) == 0) else 'issues_found'
-        }
     
     def close(self) -> None:
         """Clean up resources."""

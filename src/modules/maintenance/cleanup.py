@@ -11,8 +11,7 @@ Also cleans up junk accounts (package_*, system accounts).
 """
 import logging
 import time
-from collections import Counter
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Tuple
 
 from core.config import Config
 from clients.snipeit import SnipeITClient

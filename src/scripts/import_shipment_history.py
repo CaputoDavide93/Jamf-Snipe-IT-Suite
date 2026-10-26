@@ -19,7 +19,7 @@ import re
 import sys
 import time
 from difflib import SequenceMatcher
-from typing import Any, Dict, List, Optional, Set, Tuple
+from typing import Dict, List, Optional, Set, Tuple
 
 # Ensure src/ is on the path when invoked directly
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))

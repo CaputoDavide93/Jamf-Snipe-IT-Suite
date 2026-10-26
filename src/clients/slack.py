@@ -3,7 +3,6 @@ Jamf-SnipeIT Suite - Slack Notification Client
 Sends messages to a Slack channel via the Web API (chat.postMessage).
 Requires a Bot OAuth token (xoxb-...) with chat:write scope.
 """
-import json
 import logging
 from typing import Any, Dict, List, Optional
 
@@ -75,7 +74,7 @@ class SlackClient:
             {"type": "header", "text": {"type": "plain_text", "text": ":rotating_light:  Module Failure"}},
             {"type": "section", "fields": [
                 {"type": "mrkdwn", "text": f"*Module:*\n`{module_name}`"},
-                {"type": "mrkdwn", "text": f"*Status:*\nFailed"},
+                {"type": "mrkdwn", "text": "*Status:*\nFailed"},
             ]},
             {"type": "section", "text": {"type": "mrkdwn", "text": f"*Error:*\n```{error[:1500]}```"}},
             {"type": "context", "elements": [

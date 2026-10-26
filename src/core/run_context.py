@@ -1,6 +1,5 @@
 """Per-run module metrics and error collection."""
 import logging
-import time
 from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Any, Dict, List, Optional

@@ -10,9 +10,8 @@ Runs weekly and sends a structured Slack report.
 import json
 import logging
 import os
-import time
-from datetime import datetime, timedelta
-from typing import Any, Dict, List, Optional, Tuple
+from datetime import datetime
+from typing import Any, Dict, List
 
 from core.config import Config
 from core.client_factory import create_jamf_client, create_snipeit_client, create_slack_client

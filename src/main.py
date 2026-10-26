@@ -13,7 +13,7 @@ from typing import Optional
 
 # Module imports
 from core.config import get_config, Config
-from infra.health import start_health_server, get_health_server
+from infra.health import start_health_server
 from infra.helpers import result_error_count
 from modules import (
     LeaversModule,
@@ -178,7 +178,7 @@ def cmd_model_sync(args, config: Config):
     try:
         if getattr(args, 'check_only', False):
             results = module.check_models()
-            print(f"\n📊 Model Check Results:")
+            print("\n📊 Model Check Results:")
             print(f"   Total models in Jamf: {results['total_jamf_models']}")
             print(f"   Missing in Snipe-IT: {len(results['missing_models'])}")
             if results['missing_models']:
@@ -933,7 +933,7 @@ Examples:
     # Special handling for health server (long-running)
     if args.command == 'health-server':
         print(f"🏥 Starting health check server on {args.host}:{args.port}")
-        server = start_health_server(port=args.port, host=args.host)
+        start_health_server(port=args.port, host=args.host)
         print("   Press Ctrl+C to stop.\n")
         try:
             import time

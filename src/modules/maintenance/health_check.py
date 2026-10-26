@@ -14,7 +14,7 @@ Posts a single Slack summary. Silent if no issues.
 import logging
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
-from typing import Any, Dict, List, Optional, Set
+from typing import Any, Dict, List, Set
 
 from core.config import Config
 from core.client_factory import (

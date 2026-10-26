@@ -19,7 +19,7 @@ owners who cannot be confirmed active are left untouched for manual review.
 Posts a single Slack summary. Silent if nothing to do.
 """
 import logging
-from typing import Any, Dict, List, Optional, Set
+from typing import Any, Dict, Optional, Set
 
 from core.config import Config
 from core.client_factory import create_snipeit_client, create_slack_client, create_azure_client

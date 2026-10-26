@@ -5,7 +5,7 @@ Read-only client for extracting employee equipment data from HiBob.
 import base64
 import logging
 import time
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional
 
 import requests
 

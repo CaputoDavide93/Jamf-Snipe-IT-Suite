@@ -7,7 +7,7 @@ import json
 import logging
 import time
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from core.config import Config
 from clients.snipeit import SnipeITClient
