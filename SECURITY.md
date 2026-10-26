@@ -9,7 +9,7 @@ This application handles credentials for multiple systems:
 - **Azure AD / Microsoft Entra ID** (client secret)
 - **Slack** (bot token)
 - **HiBob** (service user token)
-- **Anthropic** (LLM API key)
+- **External AI service** (optional, API key)
 
 ### Credential storage
 
@@ -27,7 +27,7 @@ The ECS execution role has `ssm:GetParameters` scoped **only** to this project's
 - `config/config.yaml`
 - `config/*.sb-*` (editor swap files)
 - `terraform/environments/*/terraform.tfvars`
-- Any file starting with a recognisable credential prefix (`xoxb-`, `sk-ant-`, `eyJ...`)
+- Any file starting with a recognisable credential prefix (`xoxb-`, `eyJ...`, or an AI provider key prefix)
 
 The `.gitignore` covers all of these. Every commit is scanned for secrets before pushing.
 
@@ -39,7 +39,7 @@ The `.gitignore` covers all of these. Every commit is scanned for secrets before
 - **Region lock:** `eu-west-1` only (validation block)
 - **Security group:** egress-only, no inbound rules
 - **VPC:** runs in the default VPC with a public IP (needed for outbound to SaaS APIs)
-- **Tags:** every resource tagged `Owner: Davide Caputo - TechOps`
+- **Tags:** every resource carries an `Owner` tag (set in `terraform/modules/jamf-snipeit-suite/main.tf`)
 
 ### Logging
 

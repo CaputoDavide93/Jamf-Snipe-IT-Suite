@@ -33,6 +33,11 @@ jobs:
       - name: Diagrams up to date
         run: python3 tools/gen_diagram.py --check
 
+      - name: Brand icon up to date
+        run: |
+          pip install pillow
+          sh tools/brand/check-icon.sh
+
   terraform:
     runs-on: ubuntu-latest
     steps:

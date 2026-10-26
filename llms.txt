@@ -1,0 +1,33 @@
+# Jamf-SnipeIT Suite
+
+> Jamf-SnipeIT Suite is a free, open-source (MIT) Python tool for IT teams that keeps Jamf Pro, Snipe-IT, Azure AD (Entra ID) and HiBob consistent with each other. Run on a schedule on AWS Fargate, in Docker or from a terminal, it creates Snipe-IT users for new starters, checks Macs out to the right person, moves leavers' assets to Pending, restores rehires only when four independent signals agree, and reports to Slack. Every command that changes data supports a dry run.
+
+Key facts:
+
+- Tested on: Python 3.12 on Linux in CI (ruff, the pytest suite, a generated-docs check, a diagram check and Terraform fmt and validate) and Python 3.14 on macOS (the test suite, and the model-sync command against a local mock of Jamf Pro and Snipe-IT with made-up devices).
+- Not verified: live Jamf Pro, Snipe-IT, Azure AD, HiBob and Slack accounts in the documentation pass, any particular version of those products, a Docker image build in CI, and a Terraform apply. The tests and screenshots use mocks.
+- Install: `git clone https://github.com/CaputoDavide93/Jamf-SnipeIT-Suite.git`, create a virtual environment, `pip install -r requirements.txt`, copy `config/config.example.yaml` to `config/config.yaml` and fill in the Jamf Pro and Snipe-IT sections.
+- First run: `python src/main.py model-sync --check-only` lists hardware models missing from Snipe-IT and changes nothing. `python src/main.py model-sync --dry-run` previews the changes.
+- Dry run: `--dry-run` (or `-n`) is accepted by every command that changes data. `rehire-detection` and `cleanup` default to dry run until you switch it off.
+- Systems: Jamf Pro and Snipe-IT are written to. Azure AD and HiBob are read-only. Slack receives reports.
+- Leavers: a leaver's user is tagged `[Disabled]` and their assets move to Pending. Leaver records are not deleted. The `cleanup` module does merge duplicate users and remove junk accounts.
+- Rehires: restored automatically only when the Azure AD account is enabled, the person is in neither the leavers nor the disabled group, no leave date has passed, and HiBob lists them as active. Otherwise a person decides, through Slack.
+- Concurrency: every scheduled job takes a lock in AWS SSM Parameter Store. If the lock is held the later job is skipped, and if SSM is unreachable the job does not start.
+- Optional external AI service: set `AI_API_KEY` to resolve ambiguous machine-to-person matches and to run a weekly audit. Audit payloads are tokenised by default.
+- Deploy: Terraform in `terraform/` creates five EventBridge rules that start one ECS Fargate task. `./scripts/deploy.sh` plans, applies, then builds and pushes the image. Build for linux/amd64.
+- Independent project, not affiliated with or endorsed by Jamf, Snipe-IT, Microsoft or HiBob.
+
+## Docs
+
+- [README](https://github.com/CaputoDavide93/Jamf-SnipeIT-Suite/blob/main/README.md): why it exists, comparison with manual upkeep, install in 3 steps, tested environments
+- [Setup](https://github.com/CaputoDavide93/Jamf-SnipeIT-Suite/blob/main/docs/setup.md): clone to first safe run, then Docker and AWS
+- [How it works](https://github.com/CaputoDavide93/Jamf-SnipeIT-Suite/blob/main/docs/how-it-works.md): lifecycle, matching steps, schedule, safety guards, configuration layers
+- [Modules](https://github.com/CaputoDavide93/Jamf-SnipeIT-Suite/blob/main/docs/modules.md): every command and its default schedule
+- [Operations](https://github.com/CaputoDavide93/Jamf-SnipeIT-Suite/blob/main/docs/operations.md): production runbook
+- [FAQ](https://github.com/CaputoDavide93/Jamf-SnipeIT-Suite/blob/main/docs/faq.md): short answers
+- [Troubleshooting](https://github.com/CaputoDavide93/Jamf-SnipeIT-Suite/blob/main/docs/troubleshooting.md): symptoms and fixes
+
+## Optional
+
+- [Security policy](https://github.com/CaputoDavide93/Jamf-SnipeIT-Suite/blob/main/SECURITY.md)
+- [Contributing](https://github.com/CaputoDavide93/Jamf-SnipeIT-Suite/blob/main/CONTRIBUTING.md)

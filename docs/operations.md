@@ -4,7 +4,7 @@ Day-to-day tasks for running the Jamf-SnipeIT Suite in production.
 
 ## Placeholders in this guide
 
-This repo is mirrored publicly, so infrastructure identifiers are written as
+Infrastructure identifiers in this guide are written as
 placeholders. Substitute them before running any command below:
 
 | Placeholder | How to get the real value |
