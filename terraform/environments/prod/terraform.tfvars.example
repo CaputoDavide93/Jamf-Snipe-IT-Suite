@@ -11,6 +11,10 @@ aws_account_id = "000000000000"
 aws_region  = "eu-west-1"
 aws_profile = "prod"
 
+# Owner tag on every resource. An existing deployment sets its current value
+# here so a plan shows no tag changes.
+owner = "it-operations"
+
 # -- Networking (optional — empty = default VPC) --
 # Put the tasks in the same VPC as Snipe-IT to reach it over a private IP.
 vpc_id     = "" # e.g. "vpc-0123456789abcdef0"

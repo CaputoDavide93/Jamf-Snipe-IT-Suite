@@ -39,7 +39,7 @@ The `.gitignore` covers all of these. Every commit is scanned for secrets before
 - **Region lock:** `eu-west-1` only (validation block)
 - **Security group:** egress-only, no inbound rules
 - **VPC:** runs in the default VPC with a public IP (needed for outbound to SaaS APIs)
-- **Tags:** every resource carries an `Owner` tag (set in `terraform/modules/jamf-snipeit-suite/main.tf`)
+- **Tags:** every resource carries an `Owner` tag, set by the `owner` variable (default `it-operations`)
 
 ### Logging
 

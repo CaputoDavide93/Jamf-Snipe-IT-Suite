@@ -10,7 +10,7 @@ locals {
     Application = "JamfSnipeITSuite"
     Environment = var.environment
     ManagedBy   = "terraform"
-    Owner       = "Davide Caputo - TechOps"
+    Owner       = var.owner
   })
 }
 

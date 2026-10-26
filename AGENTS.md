@@ -49,7 +49,7 @@ These are runtime identifiers; renaming one breaks running deployments:
 
 - Subcommand names in `src/main.py`; the EventBridge schedules in `terraform/` call them by name.
 - Environment variables: `AI_API_KEY`, `AI_MODEL_ID`, `AI_RESOLVER_MODEL_ID`, `AI_CACHE_PATH`, `AI_CACHE_S3_BUCKET`, `AI_CACHE_S3_KEY`, `HEALTH_AUTH_TOKEN`, `LOG_JSON`, `MUTEX_DISABLED`, `MUTEX_LOCK_PARAM`, `MUTEX_LOCK_REFRESH_SEC`, and the keys of `config/config.example.yaml`.
-- The `CF-####` asset-tag format, the `/healthz` endpoint on port 8080, the Terraform module and resource names (`jamf-snipeit-suite`), and the Terraform `Owner` tag.
+- The `CF-####` asset-tag format, the `/healthz` endpoint on port 8080, the Terraform module and resource names (`jamf-snipeit-suite`), and the `owner` variable that sets the Terraform `Owner` tag.
 
 ## Secrets and demo data
 

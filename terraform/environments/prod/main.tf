@@ -44,7 +44,7 @@ provider "aws" {
       Application = "JamfSnipeITSuite"
       Environment = "prod"
       ManagedBy   = "terraform"
-      Owner       = "YOUR_TEAM"
+      Owner       = var.owner
     }
   }
 }
@@ -58,6 +58,7 @@ module "jamf_snipeit_suite" {
   environment  = "prod"
   aws_region   = var.aws_region
   project_name = var.project_name
+  owner        = var.owner
 
   # -- Networking --
   # Run in the Snipe-IT VPC so the suite reaches Snipe-IT over its private IP
@@ -153,6 +154,12 @@ variable "aws_profile" {
 variable "project_name" {
   type    = string
   default = "jamf-snipeit-suite"
+}
+
+variable "owner" {
+  type        = string
+  description = "Value of the Owner tag on every resource. An existing deployment sets its current value here to avoid tag drift."
+  default     = "it-operations"
 }
 
 variable "jamf_base_url" {
