@@ -4,15 +4,14 @@ Marks Snipe-IT assets as "Pending" for Azure AD disabled/leaving users.
 """
 import logging
 import time
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional
 
 from core.config import Config
 from clients.azure import AzureClient
 from clients.snipeit import SnipeITClient
 from clients.slack import SlackClient
-from infra.audit_csv import AuditCSV
 from infra.progress import ProgressTracker
-from infra.helpers import setup_logging, rate_limit_delay, leave_date_passed
+from infra.helpers import rate_limit_delay, leave_date_passed
 
 logger = logging.getLogger(__name__)
 

@@ -6,7 +6,6 @@ passwords, so it gets priority coverage first.
 import sys
 import string
 from pathlib import Path
-from types import SimpleNamespace
 
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 

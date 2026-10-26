@@ -6,7 +6,6 @@ APScheduler-based task scheduler for automated module execution.
 import argparse
 import sys
 import logging
-from datetime import datetime
 from typing import Any, Optional
 
 try:

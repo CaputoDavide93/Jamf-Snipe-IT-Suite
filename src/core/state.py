@@ -221,24 +221,6 @@ class RetryQueue:
             and (module is None or i["module"] == module)
         ]
 
-    def mark_completed(self, item_id: str) -> None:
-        for item in self._items:
-            if item["id"] == item_id:
-                item["status"] = "completed"
-                break
-        self._save()
-
-    def mark_failed(self, item_id: str, error: str) -> None:
-        for item in self._items:
-            if item["id"] == item_id:
-                item["attempts"] += 1
-                item["error"] = error
-                if item["attempts"] >= self.MAX_ATTEMPTS:
-                    item["status"] = "dead"
-                    logger.warning(f"Retry queue: item {item_id} moved to dead-letter after {item['attempts']} attempts")
-                break
-        self._save()
-
     def stats(self) -> Dict[str, int]:
         """Quick count of item statuses."""
         out: Dict[str, int] = {"pending": 0, "completed": 0, "dead": 0}
@@ -246,12 +228,3 @@ class RetryQueue:
             s = item.get("status", "pending")
             out[s] = out.get(s, 0) + 1
         return out
-
-    def purge_completed(self) -> int:
-        """Remove completed items.  Returns count removed."""
-        before = len(self._items)
-        self._items = [i for i in self._items if i["status"] != "completed"]
-        removed = before - len(self._items)
-        if removed:
-            self._save()
-        return removed

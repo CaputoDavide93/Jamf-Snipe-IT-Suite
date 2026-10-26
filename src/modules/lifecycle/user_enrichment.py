@@ -6,7 +6,7 @@ Runs as part of the regular pipeline (after Azure Starters).
 import html
 import logging
 import time
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 
 from core.config import Config
 from clients.azure import AzureClient
@@ -128,14 +128,9 @@ class UserEnrichmentModule:
             # Extract Azure data
             az_jobtitle = (az.get("jobTitle") or "").strip()
             az_department = (az.get("department") or "").strip()
-            az_company = (az.get("companyName") or "").strip()
 
             # Current Snipe-IT data (unescape HTML entities like &amp; → &)
             sn_jobtitle = html.unescape((su.get("jobtitle") or "").strip())
-            sn_department = su.get("department")
-            sn_dept_name = ""
-            if isinstance(sn_department, dict) and sn_department:
-                sn_dept_name = (sn_department.get("name") or "").strip()
 
             # Determine what needs updating
             update_payload: Dict[str, Any] = {}

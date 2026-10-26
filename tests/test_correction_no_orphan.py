@@ -67,7 +67,7 @@ def test_status_is_made_deployable_before_the_assignment_is_broken():
     asset is unassigned and cannot be checked out again.
     """
     snipe = FakeSnipe(status_id=PENDING)
-    mod = _module(snipe)
+    _module(snipe)
 
     original = snipe.status_id
     if original != DEPLOYED:

@@ -412,7 +412,7 @@ class Config:
             return default
         try:
             return int(value)
-        except (ValueError, TypeError) as e:
+        except (ValueError, TypeError):
             logger.warning(f"Invalid integer value for {field_name}: {value}, using default {default}")
             return default
     
@@ -422,7 +422,7 @@ class Config:
             return default
         try:
             return float(value)
-        except (ValueError, TypeError) as e:
+        except (ValueError, TypeError):
             logger.warning(f"Invalid float value for {field_name}: {value}, using default {default}")
             return default
     
@@ -521,10 +521,6 @@ class Config:
             dry_run=bool(data.get("dry_run", False)),
             extra=data,
         )
-    
-    def is_module_enabled(self, module_name: str) -> bool:
-        """Check if a module is enabled."""
-        return self.get_module_settings(module_name).enabled
     
     @property
     def config_path(self) -> Path:

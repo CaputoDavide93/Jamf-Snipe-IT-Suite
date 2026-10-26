@@ -4,7 +4,6 @@ Lightweight logger-based progress reporting with visual bar.
 """
 import logging
 import time
-from typing import Optional
 
 logger = logging.getLogger(__name__)
 

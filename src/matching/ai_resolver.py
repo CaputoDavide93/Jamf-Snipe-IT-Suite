@@ -16,7 +16,7 @@ import json
 import logging
 import os
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional
 
 from core.state import atomic_write_json, backup_corrupt_json
 
@@ -326,7 +326,7 @@ If you truly cannot determine the correct match, respond:
 
             # Only accept high/medium confidence
             if confidence not in ("high", "medium"):
-                logger.info(f"AI resolver: low confidence, skipping")
+                logger.info("AI resolver: low confidence, skipping")
                 self._set_cached(cache_key, None)
                 return None
 

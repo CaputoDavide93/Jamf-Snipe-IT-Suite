@@ -13,7 +13,7 @@ but ONLY when Jamf currently holds user data (idempotent; silent otherwise).
 The SnipeIT_Asset_ID extension attribute is left untouched.
 """
 import logging
-from typing import Any, Dict, List, Set
+from typing import Any, Dict
 
 from core.config import Config
 from core.client_factory import create_snipeit_client, create_jamf_client, create_slack_client

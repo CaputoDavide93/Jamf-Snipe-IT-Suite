@@ -383,7 +383,7 @@ class AzureStartersModule:
         
         # Show created users
         if results["created_users"]:
-            logger.info(f"  Created Users:")
+            logger.info("  Created Users:")
             for user in results["created_users"][:10]:
                 title_str = f" - {user['job_title']}" if user.get('job_title') else ""
                 logger.info(f"    -{user['name']} ({user['email']}){title_str}")
@@ -392,7 +392,7 @@ class AzureStartersModule:
         
         # Show updated users
         if results["updated_users"]:
-            logger.info(f"  Updated Users (job title):")
+            logger.info("  Updated Users (job title):")
             for user in results["updated_users"][:10]:
                 logger.info(f"    -{user['name']}: '{user['old_title']}' -> '{user['new_title']}'")
             if len(results["updated_users"]) > 10:
