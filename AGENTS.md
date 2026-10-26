@@ -28,3 +28,8 @@ This repository follows Davide Caputo's house standards. The full spec is
 - One `.env.example` with every variable the code reads (obviously fake placeholders). Examples are `<name>.example.<ext>`.
 
 <!-- ── repo-specific notes below this line ─────────────────────────────── -->
+
+- Run `make check` (ruff, pytest, `tools/gen_modules_doc.py --check`, `python3 tools/gen_diagram.py --check`, `sh tools/brand/check-icon.sh`) before and after every change. CI runs the same, plus Terraform fmt and validate.
+- Public repo: demo data only. Use `example.com` hosts, `192.0.2.x` addresses, made-up serials such as `DEMO0000101`, and no real tenant, person or employer names. Docs name the optional AI feature as an external AI service. Never change runtime identifiers (the `CF-####` asset-tag prefix, the Terraform `Owner` tag, env var names) as a side effect of a docs change.
+- The command inventory in `docs/modules.md` is generated; run `make inventory` after changing `src/main.py` or the scheduler.
+- Screenshots come from `make screenshots`: the real CLI against `tools/screenshots/mock_services.py`. Retake them when CLI output changes. Anything that needs a live Jamf Pro, Snipe-IT, Azure AD or HiBob tenant is unverified unless it was run against one; say so in the docs.
