@@ -15,13 +15,12 @@ HERE = pathlib.Path(__file__).resolve().parent
 CHROME = os.environ.get("CHROME", "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")
 INK = "#F8FAFC"
 
-# Family order. Hue steps by 12 slots (12 is coprime with 29), so every repo gets its own
-# hue and neighbours in this list are ~140 degrees apart. Slots span 100..400 degrees: the
-# muddy 40-100 yellow/olive band, where a white glyph cannot hold contrast, is skipped.
+# One repo, one fixed hue (purple). The kit this was trimmed from spreads a family of repos
+# around the colour wheel and skips the muddy yellow/olive band where a white glyph cannot
+# hold contrast.
 REPOS = ["Jamf-SnipeIT-Suite"]
 def hue_of(repo):
-    return 276  # fixed hue for this repo; the shared kit assigns it by family position
-    return round((START + ((i * STEP + OFFSET) % SLOTS) * SPAN / SLOTS) % 360)
+    return 276
 
 # ---- colour -----------------------------------------------------------------
 def _lum(rgb):
