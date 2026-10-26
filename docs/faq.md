@@ -34,7 +34,7 @@ No. Every scheduled job takes a lock in SSM first. If the lock is held, the late
 
 ## Which Jamf Pro and Snipe-IT versions work?
 
-Unknown. No versions are recorded, and the tests and screenshots use mocks that follow the documented response shapes. If you run it against a specific version, please [say so in an issue](https://github.com/CaputoDavide93/Jamf-SnipeIT-Suite/issues).
+Unknown. No versions are recorded, and the tests and screenshots use mocks that follow the documented response shapes. If you run it against a specific version, please [say so in an issue](https://github.com/CaputoDavide93/Jamf-Snipe-IT-Suite/issues).
 
 ## Can I run it without AWS?
 

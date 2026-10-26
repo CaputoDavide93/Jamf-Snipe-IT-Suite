@@ -48,4 +48,4 @@ The `FailedInvocations` alarm for the schedule fires when `RunTask` cannot launc
 
 ## Still stuck
 
-Open an [issue](https://github.com/CaputoDavide93/Jamf-SnipeIT-Suite/issues) with the command, the log lines around the error and the module's `--dry-run` output. Replace real names, serial numbers, hostnames and IP addresses with placeholders (use `192.0.2.x` for addresses) and never paste tokens.
+Open an [issue](https://github.com/CaputoDavide93/Jamf-Snipe-IT-Suite/issues) with the command, the log lines around the error and the module's `--dry-run` output. Replace real names, serial numbers, hostnames and IP addresses with placeholders (use `192.0.2.x` for addresses) and never paste tokens.

@@ -18,7 +18,7 @@ INK = "#F8FAFC"
 # One repo, one fixed hue (purple). The kit this was trimmed from spreads a family of repos
 # around the colour wheel and skips the muddy yellow/olive band where a white glyph cannot
 # hold contrast.
-REPOS = ["Jamf-SnipeIT-Suite"]
+REPOS = ["Jamf-Snipe-IT-Suite"]
 def hue_of(repo):
     return 276
 
