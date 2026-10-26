@@ -68,6 +68,7 @@ Production runs as five EventBridge rules that start one Fargate task. The infra
 1. Copy `terraform/environments/prod/terraform.tfvars.example` to `terraform.tfvars` and `backend.hcl.example` to `backend.hcl`, then fill them in. Both real files are gitignored.
 2. Run `./scripts/deploy.sh`. It runs the Terraform plan and apply, then builds and pushes `:latest` and a `:base` tag to ECR.
 3. Set `alerts_topic_arn` or `alarm_email` so a failed run reaches you.
+4. Set `owner` if you want a different `Owner` tag than the default `it-operations`. An existing deployment that was created with another value passes that value as `owner` in its own `terraform.tfvars`, so the next plan shows no tag changes.
 
 Build the image for `linux/amd64`. An ARM64 image fails on Fargate without a clear error. Day-to-day tasks (rotating secrets, overrides, on-demand runs, rollback) are in [operations.md](operations.md).
 

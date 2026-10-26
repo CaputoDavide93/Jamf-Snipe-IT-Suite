@@ -256,6 +256,12 @@ variable "log_retention_days" {
 }
 
 # -- Tags --
+variable "owner" {
+  type        = string
+  description = "Value of the Owner tag on every resource. Existing deployments pass their current value to avoid tag drift."
+  default     = "it-operations"
+}
+
 variable "tags" {
   type        = map(string)
   description = "Additional tags for all resources"
