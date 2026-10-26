@@ -1,5 +1,5 @@
 # =============================================================================
-# Production Environment — Jamf-SnipeIT Suite
+# Production Environment — Jamf-Snipe-IT Suite
 # =============================================================================
 # ECS Fargate scheduled task that runs all sync modules daily.
 #

@@ -220,7 +220,7 @@ class Canvas:
         )
 
 # ── the diagrams ──────────────────────────────────────────────────────────
-# Jamf-SnipeIT Suite: one Fargate task definition, fired by five EventBridge
+# Jamf-Snipe-IT Suite: one Fargate task definition, fired by five EventBridge
 # rules, reconciling Jamf Pro and Snipe-IT against Azure AD and HiBob.
 
 W, H = 268, 108

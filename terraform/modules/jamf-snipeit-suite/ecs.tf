@@ -17,7 +17,7 @@ resource "aws_ecs_cluster" "main" {
 resource "aws_security_group" "ecs_task" {
   name_prefix = "${local.full_name}-ecs-"
   vpc_id      = local.vpc_id
-  description = "Jamf-SnipeIT Suite ECS task - outbound API calls only"
+  description = "Jamf-Snipe-IT Suite ECS task - outbound API calls only"
 
   egress {
     from_port   = 0

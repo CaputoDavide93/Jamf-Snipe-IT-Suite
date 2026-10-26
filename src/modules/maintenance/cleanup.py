@@ -1,5 +1,5 @@
 """
-Jamf-SnipeIT Suite - Cleanup Module
+Jamf-Snipe-IT Suite - Cleanup Module
 Detects and merges duplicate Snipe-IT users.
 
 Strategy for each duplicate pair:

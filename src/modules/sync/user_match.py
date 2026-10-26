@@ -1,5 +1,5 @@
 """
-Jamf-SnipeIT Suite - User Match Module
+Jamf-Snipe-IT Suite - User Match Module
 Auto-provisions Snipe-IT assets from Jamf and matches users.
 """
 import json

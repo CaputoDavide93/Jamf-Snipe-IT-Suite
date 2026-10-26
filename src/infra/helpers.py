@@ -1,5 +1,5 @@
 """
-Jamf-SnipeIT Suite - Utility helpers
+Jamf-Snipe-IT Suite - Utility helpers
 Logging setup, countdown, rate-limit delay, log cleanup.
 """
 import logging

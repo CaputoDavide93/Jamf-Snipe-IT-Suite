@@ -1,5 +1,5 @@
 """
-Jamf-SnipeIT Suite - Snipe-IT to Jamf Sync Module
+Jamf-Snipe-IT Suite - Snipe-IT to Jamf Sync Module
 Writes the Snipe-IT asset ID back to each Jamf computer as an Extension Attribute.
 
 IMPORTANT: Jamf is the source of truth for user identity (username, full name,

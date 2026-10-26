@@ -1,5 +1,5 @@
 """
-Jamf-SnipeIT Suite - Unified Snipe-IT API Client
+Jamf-Snipe-IT Suite - Unified Snipe-IT API Client
 Consolidates all Snipe-IT API functionality from multiple scripts.
 """
 import logging

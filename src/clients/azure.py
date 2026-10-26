@@ -1,5 +1,5 @@
 """
-Jamf-SnipeIT Suite - Azure AD / Microsoft Graph API Client
+Jamf-Snipe-IT Suite - Azure AD / Microsoft Graph API Client
 Used by the Leavers module to fetch disabled users.
 """
 import logging

@@ -1,5 +1,5 @@
 """
-Jamf-SnipeIT Suite - Infrastructure Utilities
+Jamf-Snipe-IT Suite - Infrastructure Utilities
 Helpers, progress tracking, audit logging, health checks.
 """
 from .helpers import (

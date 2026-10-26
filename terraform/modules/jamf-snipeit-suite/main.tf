@@ -1,5 +1,5 @@
 # =============================================================================
-# Jamf-SnipeIT Suite — ECS Fargate Scheduled Task
+# Jamf-Snipe-IT Suite — ECS Fargate Scheduled Task
 # =============================================================================
 
 locals {

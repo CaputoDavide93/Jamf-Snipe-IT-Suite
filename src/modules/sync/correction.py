@@ -1,5 +1,5 @@
 """
-Jamf-SnipeIT Suite - Self-Healing Correction Module
+Jamf-Snipe-IT Suite - Self-Healing Correction Module
 Detects and fixes wrong matches/assignments from previous runs.
 
 Runs BEFORE User Match on each execution to:

@@ -1,5 +1,5 @@
 """
-Jamf-SnipeIT Suite - Core module
+Jamf-Snipe-IT Suite - Core module
 Configuration, run context, and sync state.
 
 API clients have moved to ``clients/``.

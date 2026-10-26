@@ -1,6 +1,6 @@
 # Operations Guide
 
-Day-to-day tasks for running the Jamf-SnipeIT Suite in production.
+Day-to-day tasks for running the Jamf-Snipe-IT Suite in production.
 
 ## Placeholders in this guide
 

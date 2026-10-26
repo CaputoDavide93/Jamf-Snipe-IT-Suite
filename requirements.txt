@@ -1,4 +1,4 @@
-# Jamf-SnipeIT Suite Dependencies
+# Jamf-Snipe-IT Suite Dependencies
 # Core dependencies
 requests>=2.28.0
 PyYAML>=6.0

@@ -465,7 +465,7 @@ Do NOT include any explanation outside the JSON."""
 
         blocks.append({"type": "divider"})
         blocks.append({"type": "context", "elements": [
-            {"type": "mrkdwn", "text": f":robot_face:  _AI Audit | {datetime.now().strftime('%Y-%m-%d %H:%M')} | Jamf-SnipeIT Suite_"}
+            {"type": "mrkdwn", "text": f":robot_face:  _AI Audit | {datetime.now().strftime('%Y-%m-%d %H:%M')} | Jamf-Snipe-IT Suite_"}
         ]})
 
         self.slack.post_to_channel(
