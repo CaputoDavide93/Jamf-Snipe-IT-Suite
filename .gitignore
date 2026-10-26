@@ -100,3 +100,22 @@ backend.hcl
 
 # Screenshot environment (make screenshots)
 .venv-screenshots/
+
+# Secrets and credentials: never commit
+!.env.example
+secrets.yaml
+secrets.yml
+*.pem
+*.key
+*.p8
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.mobileprovision
+id_rsa
+id_ed25519
+credentials.json
+service-account*.json
+google-services.json
+GoogleService-Info.plist
