@@ -35,7 +35,7 @@ The `.gitignore` covers all of these. Every commit is scanned for secrets before
 
 ### AWS Fargate task
 
-- **Account lock:** `allowed_account_ids = ["<AWS_ACCOUNT_ID>"]` — Terraform refuses to deploy anywhere else
+- **Account lock:** `allowed_account_ids = ["<AWS_ACCOUNT_ID>"]`: Terraform refuses to deploy anywhere else
 - **Region lock:** `eu-west-1` only (validation block)
 - **Security group:** egress-only, no inbound rules
 - **VPC:** runs in the default VPC with a public IP (needed for outbound to SaaS APIs)
@@ -61,14 +61,14 @@ CloudWatch logs are sanitised:
 
 ### Auto-created user passwords
 
-New Snipe-IT users created from Azure AD receive a cryptographically random 24-character password. Users must reset it via Snipe-IT's password reset flow — the plaintext is never logged or stored.
+New Snipe-IT users created from Azure AD receive a cryptographically random 24-character password. Users must reset it via Snipe-IT's password reset flow. The plaintext is never logged or stored.
 
 ## Change management
 
 ### Secret rotation
 
 ```bash
-# Rotate any credential via SSM — next Fargate run picks it up automatically
+# Rotate any credential via SSM; the next Fargate run picks it up automatically
 aws ssm put-parameter \
   --name /jamf-snipeit-suite-prod/<name> \
   --value "<new-value>" \

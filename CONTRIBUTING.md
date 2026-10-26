@@ -1,237 +1,32 @@
-# 🤝 Contributing to Jamf-SnipeIT Suite
+# Contributing
 
-First off, thank you for considering contributing! 🎉
+Issues and pull requests are welcome. Most of what this suite does needs Jamf Pro, Snipe-IT, Azure AD and HiBob tenants, so the tests mock every external service and a report from a real environment is as useful as a fix.
 
-## 📋 Table of Contents
+## Report a bug or an environment
 
-- [Code of Conduct](#code-of-conduct)
-- [Getting Started](#getting-started)
-- [Development Setup](#development-setup)
-- [How to Contribute](#how-to-contribute)
-- [Pull Request Process](#pull-request-process)
-- [Style Guidelines](#style-guidelines)
-- [Security](#security)
+Open an issue with:
 
-## 📜 Code of Conduct
+- What you ran, with tenant URLs, serial numbers and user names replaced by placeholders.
+- What you expected and what happened, including the relevant log lines.
+- Python version, operating system, and whether you ran it from a terminal, Docker or Fargate.
 
-This project adheres to a Code of Conduct. By participating, you are expected to uphold this code:
+Remove tokens, passwords, tenant URLs, serial numbers and user names before you paste anything. Never attach `config/config.yaml`. To report a vulnerability, follow [SECURITY.md](SECURITY.md) instead of opening an issue.
 
-- Be respectful and inclusive
-- Welcome newcomers and help them get started
-- Focus on what is best for the community
-- Show empathy towards other community members
+## Send a change
 
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Python 3.11+
-- Docker & Docker Compose (optional, for containerized development)
-- Access to test instances of Jamf Pro, Snipe-IT, and Azure AD (or mock them)
-
-### Development Setup
-
-1. **Fork and clone the repository**
-   ```bash
-   git clone https://github.com/YOUR_USERNAME/Jamf-Snipe-IT-Suite.git
-   cd Jamf-Snipe-IT-Suite
-   ```
-
-2. **Create a virtual environment**
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
-
-3. **Install dependencies**
-   ```bash
-   pip install -r requirements.txt
-   pip install pytest pytest-cov black flake8 mypy  # Dev dependencies
-   ```
-
-4. **Set up configuration**
-   ```bash
-   cp config/config.example.yaml config/config.yaml
-   # Edit with your test credentials
-   ```
-
-5. **Run tests**
-   ```bash
-   pytest tests/ -v
-   ```
-
-## 💡 How to Contribute
-
-### 🐛 Reporting Bugs
-
-Before creating a bug report:
-- Check existing issues to avoid duplicates
-- Collect relevant information (logs, config, steps to reproduce)
-
-Include in your bug report:
-- Clear, descriptive title
-- Steps to reproduce
-- Expected vs actual behavior
-- Environment details (OS, Python version, Docker version)
-- Relevant logs (sanitize any credentials!)
-
-### 💡 Suggesting Features
-
-Feature requests are welcome! Please include:
-- Clear description of the feature
-- Use case / problem it solves
-- Potential implementation approach (optional)
-
-### 🔧 Code Contributions
-
-1. **Pick an issue** or create one for discussion
-2. **Comment** that you're working on it
-3. **Fork** and create a feature branch
-4. **Implement** your changes
-5. **Test** thoroughly
-6. **Submit** a pull request
-
-## 📝 Pull Request Process
-
-### Before Submitting
-
-- [ ] Code follows project style guidelines
-- [ ] All tests pass (`pytest tests/ -v`)
-- [ ] Linting passes (`flake8 src/`)
-- [ ] No secrets or credentials in code
-- [ ] Documentation updated if needed
-- [ ] Commit messages are clear and descriptive
-
-### PR Template
-
-```markdown
-## Description
-Brief description of changes
-
-## Type of Change
-- [ ] Bug fix
-- [ ] New feature
-- [ ] Breaking change
-- [ ] Documentation update
-
-## Testing
-How was this tested?
-
-## Checklist
-- [ ] Tests added/updated
-- [ ] Documentation updated
-- [ ] No secrets in code
-```
-
-### Review Process
-
-1. Maintainer reviews the PR
-2. Feedback addressed
-3. Tests pass in CI
-4. PR merged
-
-## 🎨 Style Guidelines
-
-### Python
-
-- Follow PEP 8
-- Use type hints where practical
-- Maximum line length: 100 characters
-- Use meaningful variable names
-
-```python
-# Good
-def get_asset_by_serial(serial: str) -> Optional[Dict[str, Any]]:
-    """Fetch an asset from Snipe-IT by serial number."""
-    ...
-
-# Avoid
-def get(s):
-    ...
-```
-
-### Formatting
-
-Use `black` for consistent formatting:
 ```bash
-black src/ --line-length 100
+git clone https://github.com/<your-fork>/Jamf-Snipe-IT-Suite.git && cd Jamf-Snipe-IT-Suite
+make venv     # .venv from requirements.lock.txt, plus pytest and ruff
+make check    # ruff, pytest, the generated command table, diagrams, icon
 ```
 
-### Linting
+1. Branch from `main`.
+2. Make the change and add a test where it fits. Every command that writes must keep its `--dry-run`.
+3. Run `make check`. CI runs the same checks plus `terraform fmt` and `terraform validate`.
+4. Open a pull request with a conventional title such as `fix: ...` or `docs: ...`.
 
-Use `flake8` to check for issues:
-```bash
-flake8 src/ --max-line-length 100
-```
+`docs/modules.md` has a command table generated from `src/main.py`; run `make inventory` after changing a command. Diagrams come from `tools/gen_diagram.py` (`make diagram`). If you change what the CLI prints, retake the screenshots with `make screenshots`.
 
-### Commits
+## Demo data only
 
-- Use clear, descriptive commit messages
-- Start with a verb: "Add", "Fix", "Update", "Remove"
-- Reference issues when applicable: "Fix #123: Handle API timeout"
-
-```
-Good:  Add dry-run mode to WakeUp module
-Good:  Fix rate limiting in Snipe-IT client
-Avoid: fixed stuff
-Avoid: updates
-```
-
-### Documentation
-
-- Update README.md for user-facing changes
-- Add docstrings to functions and classes
-- Include usage examples for new features
-
-## 🔒 Security
-
-**CRITICAL:** Never commit:
-- API tokens or credentials
-- Real URLs to production systems
-- Personal or company-specific information
-- Secrets in any form
-
-See [SECURITY.md](SECURITY.md) for full security guidelines.
-
-## 📁 Project Structure
-
-```text
-Jamf-Snipe-IT-Suite/
-├── src/
-│   ├── clients/        # API clients (jamf, snipeit, azure, hibob, slack)
-│   ├── core/           # Config schema, client factory, run context, state
-│   ├── matching/       # User matching + AI resolver
-│   ├── infra/          # Mutex, health server, audit CSV, helpers
-│   ├── modules/        # Feature modules (lifecycle, sync, maintenance)
-│   ├── scripts/        # One-off imports (run from src/ as python -m scripts.<name>)
-│   └── main.py         # CLI entry point
-├── config/
-│   └── config.example.yaml
-├── scripts/            # deploy.sh, verify-image.sh, docker-entrypoint.sh
-├── terraform/          # AWS infrastructure
-├── tests/              # pytest suite
-├── tools/              # Doc and diagram generators
-├── docs/               # Runbook + diagram assets
-└── README.md
-```
-
-## 🏷️ Issue Labels
-
-| Label | Description |
-|-------|-------------|
-| `bug` | Something isn't working |
-| `enhancement` | New feature request |
-| `documentation` | Documentation improvements |
-| `good first issue` | Good for newcomers |
-| `help wanted` | Extra attention needed |
-| `security` | Security-related |
-
-## 📞 Getting Help
-
-- Open an issue for questions
-- Check existing documentation
-- Security issues: use [private vulnerability reporting](../../security/advisories/new) (see [SECURITY.md](SECURITY.md))
-
----
-
-**Thank you for contributing!** 🙏
+The repository is public. Use `example.com` hosts, `192.0.2.x` addresses and made-up serials such as `DEMO0000101` in code, tests and docs. Never commit credentials, real tenant URLs or real names.

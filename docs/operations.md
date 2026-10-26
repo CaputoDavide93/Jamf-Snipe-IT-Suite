@@ -13,28 +13,28 @@ placeholders. Substitute them before running any command below:
 | `<SUBNET_ID>` / `<SECURITY_GROUP_ID>` | `terraform output` in `terraform/environments/prod`, or the ECS service's network config in the console |
 | `<SLACK_CHANNEL_ID>` | The `slack_channel_id` value in your `terraform.tfvars` / SSM |
 
-`./scripts/deploy.sh` resolves the account ID itself — prefer it over the manual
+`./scripts/deploy.sh` resolves the account ID itself, so prefer it over the manual
 Docker commands where you can.
 
 ## Daily checks
 
 The system runs automatically at 06:00 UTC. You should only need to check:
 
-1. **Slack channel** (`<SLACK_CHANNEL_ID>`) — only posts when there's something to action
-2. **CloudWatch logs** — `/ecs/jamf-snipeit-suite-prod` if you want to see full run details
+1. **Slack channel** (`<SLACK_CHANNEL_ID>`): posts only when there is something to act on
+2. **CloudWatch logs**: `/ecs/jamf-snipeit-suite-prod` has the full run details
 
 ### What Slack alerts mean
 
 | Alert | What to do |
 |-------|------------|
-| `Correction — Assignment Mismatches` | A mismatch was found AND auto-correction failed. Investigate the specific asset in Snipe-IT. |
-| `User Match — Unmatched Devices` | A machine has a local account we can't match to anyone. Usually means a new hire not yet in Azure AD, or an ex-employee whose data is gone. |
-| `No local user account (only admin/system accounts)` | Shared / test-lab Mac with no real person account on it. Assign the real owner manually in Snipe-IT — the system will not revert it (it never reassigns without a local-account match). |
+| `Correction: Assignment Mismatches` | A mismatch was found AND auto-correction failed. Investigate the specific asset in Snipe-IT. |
+| `User Match: Unmatched Devices` | A machine has a local account we can't match to anyone. Usually means a new hire not yet in Azure AD, or an ex-employee whose data is gone. |
+| `No local user account (only admin/system accounts)` | Shared / test-lab Mac with no real person account on it. Assign the real owner manually in Snipe-IT. The system will not revert it, because it never reassigns without a local-account match. |
 | `Duplicate Users in Snipe-IT` | Two Snipe-IT users share the same display name. Merge them manually. |
 | `AI Cross-Platform Audit` | Weekly audit findings. Review severity and take action on critical/high items. |
 | `Module Failure` | A module crashed. Check CloudWatch logs for stack trace. |
 
-Successful auto-corrections **do not** generate Slack alerts — silent operation means it worked.
+Successful auto-corrections **do not** generate Slack alerts. Silence means it worked.
 
 ## Common tasks
 
@@ -48,7 +48,7 @@ aws ecr get-login-password --region eu-west-1 \
   | docker login --username AWS --password-stdin \
     <AWS_ACCOUNT_ID>.dkr.ecr.eu-west-1.amazonaws.com
 
-# 2. Build — MUST be linux/amd64; ARM64 silently fails on Fargate
+# 2. Build. Must be linux/amd64; ARM64 silently fails on Fargate
 docker build --platform linux/amd64 \
   -t <AWS_ACCOUNT_ID>.dkr.ecr.eu-west-1.amazonaws.com/jamf-snipeit-suite-prod:latest .
 
@@ -57,7 +57,7 @@ docker push \
   <AWS_ACCOUNT_ID>.dkr.ecr.eu-west-1.amazonaws.com/jamf-snipeit-suite-prod:latest
 ```
 
-The ECS task definition already references `:latest` — no task-def update needed.
+The ECS task definition already references `:latest`, so no task-definition update is needed.
 The next EventBridge trigger picks up the new image automatically.
 
 To verify the push landed:
@@ -106,13 +106,13 @@ When matching consistently picks the wrong Snipe-IT user for a given Jamf local 
 
 ### Onboarding a new SSO (SAML) user in Snipe-IT
 
-**Background (2026-08-05):** the Snipe-IT EC2 migration surfaced a real gap — Snipe-IT's SAML login hardcodes matching the IdP's `emailaddress` claim (a full email address) against the local `username` column. Nearly every Snipe-IT user has a short-form `username` (`firstname.lastname`, no `@domain`) because that's what the Jamf-device-matching logic in this suite (`UserMatcher`) is built around. The two are incompatible for any user who actually needs to log into Snipe-IT via SSO.
+**Background (2026-08-05):** the Snipe-IT EC2 migration surfaced a real gap: Snipe-IT's SAML login hardcodes matching the IdP's `emailaddress` claim (a full email address) against the local `username` column. Nearly every Snipe-IT user has a short-form `username` (`firstname.lastname`, no `@domain`) because that's what the Jamf-device-matching logic in this suite (`UserMatcher`) is built around. The two are incompatible for any user who actually needs to log into Snipe-IT via SSO.
 
-`username_standardize.py` runs on a schedule and actively converts any `username` containing `@` back to short form — so a manual fix to `username` alone will get silently reverted.
+`username_standardize.py` runs on a schedule and actively converts any `username` containing `@` back to short form, so a manual fix to `username` alone will get silently reverted.
 
 When someone new needs SAML login access to Snipe-IT:
 
-1. Let them get provisioned normally first (via Azure Starters or however their account already exists) — don't change anything yet.
+1. Let them get provisioned normally first (via Azure Starters or however their account already exists). Don't change anything yet.
 2. In Snipe-IT (Admin → Users → edit user), set their `Username` field to their **full email address**, matching exactly what Azure sends.
 3. Add that email (lowercase) to `preserved_usernames` in `config/user_overrides.json`:
    ```json
@@ -123,9 +123,9 @@ When someone new needs SAML login access to Snipe-IT:
    ]
    ```
    This is the only thing that stops `username_standardize.py` reverting the change on its next scheduled run.
-4. In Snipe-IT, make sure their account is **Activated** — this is the actual login gate (`samlLogin()` requires `activated = 1`; it won't find a deactivated user at all).
+4. In Snipe-IT, make sure their account is **Activated**. This is the actual login gate (`samlLogin()` requires `activated = 1`; it won't find a deactivated user at all).
 
-**Do not** change `azure_starters.py`/`user_match.py` to make *every* new user's username the full email address — that would break Jamf-device matching for everyone else, since `UserMatcher` is built around short-form usernames matching macOS local account names. The `preserved_usernames` override is the correct, narrow fix for the small number of people who actually need SSO.
+**Do not** change `azure_starters.py`/`user_match.py` to make *every* new user's username the full email address. That would break Jamf-device matching for everyone else, since `UserMatcher` is built around short-form usernames matching macOS local account names. The `preserved_usernames` override is the correct, narrow fix for the small number of people who actually need SSO.
 
 ### Adding a new equipment mapping (HiBob to Snipe-IT)
 
@@ -224,7 +224,7 @@ for u in local_users:
 
 ### Handling a leaver
 
-Automatic — when someone is moved to the Azure AD leavers or disabled group:
+Automatic, when someone is moved to the Azure AD leavers or disabled group:
 
 1. Daily 07:30 Leavers module detects them
 2. Their assets set to `Pending` status
@@ -233,7 +233,7 @@ Automatic — when someone is moved to the Azure AD leavers or disabled group:
 
 ### Handling a new hire
 
-Automatic — when IT sets up their Mac:
+Automatic, when IT sets up their Mac:
 
 1. They're already in Azure AD (IT provisions in advance)
 2. Jamf enrolls the Mac, local account `newhire` is created
@@ -267,7 +267,7 @@ aws ssm put-parameter \
   --overwrite
 ```
 
-The ECS task reads SSM parameters at container start — just trigger a new run to pick up the change.
+The ECS task reads SSM parameters at container start, so trigger a new run to pick up the change.
 
 ## Schedule overview
 
@@ -291,7 +291,7 @@ right CLI subcommand or `run-group`.
 | `…-housekeeping` | Sun 21:00  | Sun 22:00 BST | cleanup → pending-reconciliation → jamf-location-cleanup → ai-audit → reconciliation |
 | `…-monthly-digest` | First Mon 09:00 | 10:00 BST | monthly-digest |
 
-`wakeup` is intentionally manual — invoke via CLI or interactive menu.
+`wakeup` is intentionally manual: invoke it via the CLI or interactive menu.
 
 `username-standardize` was removed from the housekeeping chain on 2026-08-03:
 it is a completed one-time migration and reported every username already
