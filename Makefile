@@ -33,4 +33,4 @@ screenshots: venv ## Retake docs/assets/screenshots/ against the demo mock (not 
 	.venv-screenshots/bin/python tools/screenshots/take_screenshots.py
 
 social-preview: ## Redraw docs/assets/social-preview.png (needs Google Chrome and pillow)
-	python3 tools/brand/brand_kit.py social --repo Jamf-Snipe-IT-Suite --name "Jamf-SnipeIT Suite" --tagline "Keep Jamf Pro and Snipe-IT in step with Azure AD and HiBob, on a schedule" --chip "Dry run first" --chip "AWS Fargate" --chip "Pending, never delete" --icon docs/assets/brand/icon.svg
+	python3 tools/brand/brand_kit.py social --repo Jamf-Snipe-IT-Suite --name "Jamf-Snipe-IT Suite" --tagline "Keep Jamf Pro and Snipe-IT in step with Azure AD and HiBob, on a schedule" --chip "Dry run first" --chip "AWS Fargate" --chip "Pending, never delete" --icon docs/assets/brand/icon.svg

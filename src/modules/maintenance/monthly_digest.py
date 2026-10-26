@@ -191,7 +191,7 @@ class MonthlyDigestModule:
             "elements": [
                 {
                     "type": "mrkdwn",
-                    "text": f":robot_face:  _Monthly Digest | {datetime.now().strftime('%Y-%m-%d %H:%M')} | Jamf-SnipeIT Suite_",
+                    "text": f":robot_face:  _Monthly Digest | {datetime.now().strftime('%Y-%m-%d %H:%M')} | Jamf-Snipe-IT Suite_",
                 }
             ],
         })

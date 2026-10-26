@@ -1,5 +1,5 @@
 # =============================================================================
-# Input Variables — Jamf-SnipeIT Suite ECS Fargate
+# Input Variables — Jamf-Snipe-IT Suite ECS Fargate
 # =============================================================================
 
 variable "environment" {

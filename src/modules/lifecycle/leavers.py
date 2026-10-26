@@ -1,5 +1,5 @@
 """
-Jamf-SnipeIT Suite - Leavers Module
+Jamf-Snipe-IT Suite - Leavers Module
 Marks Snipe-IT assets as "Pending" for Azure AD disabled/leaving users.
 """
 import logging

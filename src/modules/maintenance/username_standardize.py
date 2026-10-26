@@ -1,5 +1,5 @@
 """
-Jamf-SnipeIT Suite - Username Standardization Module
+Jamf-Snipe-IT Suite - Username Standardization Module
 Converts all email-style usernames (user@example.com) to plain format (user.name).
 One-time migration module, safe to re-run (idempotent).
 """

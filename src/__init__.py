@@ -1,5 +1,5 @@
 """
-Jamf-SnipeIT Suite
+Jamf-Snipe-IT Suite
 A unified tool for managing asset synchronization between Jamf Pro, Snipe-IT, and Azure AD.
 """
 __version__ = "1.0.0"

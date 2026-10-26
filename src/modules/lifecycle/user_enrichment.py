@@ -1,5 +1,5 @@
 """
-Jamf-SnipeIT Suite - User Enrichment Module
+Jamf-Snipe-IT Suite - User Enrichment Module
 Enriches Snipe-IT users with department, company, and jobtitle from Azure AD.
 Runs as part of the regular pipeline (after Azure Starters).
 """

@@ -1,5 +1,5 @@
 """
-Jamf-SnipeIT Suite - Configuration Loader
+Jamf-Snipe-IT Suite - Configuration Loader
 Unified configuration management for all modules.
 Supports environment variable substitution: ${ENV_VAR} or ${ENV_VAR:-default}
 """
@@ -118,7 +118,7 @@ class ConfigurationError(Exception):
 
 class Config:
     """
-    Unified configuration manager for Jamf-SnipeIT Suite.
+    Unified configuration manager for Jamf-Snipe-IT Suite.
     Loads configuration from YAML file and provides typed access.
     """
     

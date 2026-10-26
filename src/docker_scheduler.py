@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Jamf-SnipeIT Suite - Docker Scheduler
+Jamf-Snipe-IT Suite - Docker Scheduler
 Main entry point for Docker container with:
 - Pre-flight API connectivity check
 - Per-module execution metrics and Slack summaries
@@ -90,7 +90,7 @@ def setup_logging(level: str = "INFO", log_file: Optional[str] = None):
 
 def print_banner():
     """Print startup banner."""
-    print("\n  Jamf-SnipeIT Suite — Docker Mode")
+    print("\n  Jamf-Snipe-IT Suite — Docker Mode")
     print("  Type NOW for on-demand menu | Ctrl+C to stop\n")
 
 
@@ -847,7 +847,7 @@ def signal_handler(signum, frame):
 def main():
     global config, running, slack, sync_state, _config_mtime
     
-    parser = argparse.ArgumentParser(description='Jamf-SnipeIT Suite - Docker Scheduler')
+    parser = argparse.ArgumentParser(description='Jamf-Snipe-IT Suite - Docker Scheduler')
     parser.add_argument('--config', '-c', default='/app/config/config.yaml',
                         help='Path to configuration file')
     parser.add_argument('--log-file', '-l', default='/app/logs/scheduler.log',

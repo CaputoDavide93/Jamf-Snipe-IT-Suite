@@ -1,5 +1,5 @@
 """
-Jamf-SnipeIT Suite - Unified Jamf Pro API Client
+Jamf-Snipe-IT Suite - Unified Jamf Pro API Client
 Consolidates all Jamf API functionality from multiple scripts.
 """
 import logging

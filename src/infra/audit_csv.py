@@ -1,5 +1,5 @@
 """
-Jamf-SnipeIT Suite - Audit CSV Writer
+Jamf-Snipe-IT Suite - Audit CSV Writer
 Thread-safe CSV logger for operation auditing.
 """
 import csv

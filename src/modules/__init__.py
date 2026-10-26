@@ -1,5 +1,5 @@
 """
-Jamf-SnipeIT Suite - Modules
+Jamf-Snipe-IT Suite - Modules
 Re-exports from sync/, lifecycle/, and maintenance/ subpackages.
 """
 # --- Sync ---

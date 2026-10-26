@@ -1,5 +1,5 @@
 """
-Jamf-SnipeIT Suite - User Matching Utilities
+Jamf-Snipe-IT Suite - User Matching Utilities
 Fuzzy matching algorithms and the UserMatcher class.
 """
 import logging

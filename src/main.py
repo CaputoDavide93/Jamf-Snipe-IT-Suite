@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Jamf-SnipeIT Suite - Main CLI Entry Point
+Jamf-Snipe-IT Suite - Main CLI Entry Point
 Unified tool for asset management between Jamf Pro, Snipe-IT, and Azure AD.
 """
 import argparse
@@ -86,7 +86,7 @@ def print_banner():
     """Print application banner."""
     banner = """
 ╔═══════════════════════════════════════════════════════════╗
-║                   Jamf-SnipeIT Suite                      ║
+║                   Jamf-Snipe-IT Suite                     ║
 ║     Unified Asset Management & Synchronization Tool       ║
 ╚═══════════════════════════════════════════════════════════╝
     """
@@ -627,7 +627,7 @@ def interactive_menu(config: Config):
     """Interactive menu for selecting modules to run."""
     while True:
         print("\n" + "="*60)
-        print("  Jamf-SnipeIT Suite - Interactive Menu")
+        print("  Jamf-Snipe-IT Suite - Interactive Menu")
         print("="*60)
         print("\n  Available Modules:")
         print("  1. Leavers - Mark assets of disabled Azure users")
@@ -704,7 +704,7 @@ def interactive_menu(config: Config):
 def main():
     """Main entry point."""
     parser = argparse.ArgumentParser(
-        description='Jamf-SnipeIT Suite - Unified Asset Management Tool',
+        description='Jamf-Snipe-IT Suite - Unified Asset Management Tool',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:

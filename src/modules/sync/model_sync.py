@@ -1,5 +1,5 @@
 """
-Jamf-SnipeIT Suite - Model Sync Module
+Jamf-Snipe-IT Suite - Model Sync Module
 Syncs model metadata from Jamf to Snipe-IT.
 Auto-creates models and manufacturers as needed.
 """

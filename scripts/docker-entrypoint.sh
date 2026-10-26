@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Jamf-SnipeIT Suite - Docker Entrypoint
+# Jamf-Snipe-IT Suite - Docker Entrypoint
 #
 # This script handles:
 # - Environment variable configuration
@@ -17,7 +17,7 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-echo -e "${BLUE}Jamf-SnipeIT Suite — Initializing${NC}"
+echo -e "${BLUE}Jamf-Snipe-IT Suite — Initializing${NC}"
 
 # Change to app directory
 cd /app

@@ -1,5 +1,5 @@
 """
-Jamf-SnipeIT Suite - API Clients
+Jamf-Snipe-IT Suite - API Clients
 All external service clients.
 """
 from .jamf import JamfClient

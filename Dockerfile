@@ -1,4 +1,4 @@
-# Jamf-SnipeIT Suite
+# Jamf-Snipe-IT Suite
 # Multi-stage build for optimized image size
 # Supports both AMD64 (Intel) and ARM64 (Apple Silicon M1/M2/M3)
 
@@ -28,7 +28,7 @@ RUN pip install --no-cache-dir --upgrade pip && \
 FROM python:3.12-slim-trixie
 
 LABEL maintainer="Davide Caputo (https://github.com/CaputoDavide93)"
-LABEL description="Jamf-SnipeIT Suite - Unified Asset Management Tool"
+LABEL description="Jamf-Snipe-IT Suite - Unified Asset Management Tool"
 LABEL version="1.0.0"
 
 # Pull Debian security fixes published since the base image was cut

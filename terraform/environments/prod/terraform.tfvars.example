@@ -1,5 +1,5 @@
 # =============================================================================
-# Jamf-SnipeIT Suite — Production Variables
+# Jamf-Snipe-IT Suite — Production Variables
 # =============================================================================
 # Copy this file to terraform.tfvars and fill in your values.
 # NEVER commit terraform.tfvars to version control!

@@ -1,4 +1,4 @@
-# Jamf-SnipeIT Suite - Docker Compose Configuration
+# Jamf-Snipe-IT Suite - Docker Compose Configuration
 #
 # Default mode: Scheduler with startup run + "NOW" command support
 # Usage:

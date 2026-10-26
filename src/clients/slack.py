@@ -1,5 +1,5 @@
 """
-Jamf-SnipeIT Suite - Slack Notification Client
+Jamf-Snipe-IT Suite - Slack Notification Client
 Sends messages to a Slack channel via the Web API (chat.postMessage).
 Requires a Bot OAuth token (xoxb-...) with chat:write scope.
 """
@@ -78,7 +78,7 @@ class SlackClient:
             ]},
             {"type": "section", "text": {"type": "mrkdwn", "text": f"*Error:*\n```{error[:1500]}```"}},
             {"type": "context", "elements": [
-                {"type": "mrkdwn", "text": ":robot_face:  _Sent by Jamf-SnipeIT Suite_"}
+                {"type": "mrkdwn", "text": ":robot_face:  _Sent by Jamf-Snipe-IT Suite_"}
             ]},
         ]
         return self._post(text, blocks)
@@ -142,7 +142,7 @@ class SlackClient:
                 })
 
         blocks.append({"type": "context", "elements": [
-            {"type": "mrkdwn", "text": ":robot_face:  _Sent by Jamf-SnipeIT Suite_"}
+            {"type": "mrkdwn", "text": ":robot_face:  _Sent by Jamf-Snipe-IT Suite_"}
         ]})
 
         return self._post(f"Run completed with {total_errors} error(s)", blocks)
@@ -247,7 +247,7 @@ class SlackClient:
 
         blocks.append({"type": "divider"})
         blocks.append({"type": "context", "elements": [
-            {"type": "mrkdwn", "text": ":robot_face:  _Sent by Jamf-SnipeIT Suite_"}
+            {"type": "mrkdwn", "text": ":robot_face:  _Sent by Jamf-Snipe-IT Suite_"}
         ]})
 
         return self.post_to_channel(channel_id, f"{title} ({len(items)} items)", blocks)

@@ -1,5 +1,5 @@
 """
-Jamf-SnipeIT Suite - Matching Utilities
+Jamf-Snipe-IT Suite - Matching Utilities
 User matching algorithms and identity resolution.
 """
 from .user_matcher import (

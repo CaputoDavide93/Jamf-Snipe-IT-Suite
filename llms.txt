@@ -1,6 +1,6 @@
-# Jamf-SnipeIT Suite
+# Jamf-Snipe-IT Suite
 
-> Jamf-SnipeIT Suite is a free, open-source (MIT) Python tool for IT teams that keeps Jamf Pro, Snipe-IT, Azure AD (Entra ID) and HiBob consistent with each other. Run on a schedule on AWS Fargate, in Docker or from a terminal, it creates Snipe-IT users for new starters, checks Macs out to the right person, moves leavers' assets to Pending, restores rehires only when four independent signals agree, and reports to Slack. Every command that changes data supports a dry run.
+> Jamf-Snipe-IT Suite is a free, open-source (MIT) Python tool for IT teams that keeps Jamf Pro, Snipe-IT, Azure AD (Entra ID) and HiBob consistent with each other. Run on a schedule on AWS Fargate, in Docker or from a terminal, it creates Snipe-IT users for new starters, checks Macs out to the right person, moves leavers' assets to Pending, restores rehires only when four independent signals agree, and reports to Slack. Every command that changes data supports a dry run.
 
 Key facts:
 

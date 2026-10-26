@@ -1,6 +1,6 @@
 # FAQ
 
-## What is Jamf-SnipeIT Suite?
+## What is Jamf-Snipe-IT Suite?
 
 It is a Python tool, run on a schedule, that keeps Jamf Pro, Snipe-IT, Azure AD and HiBob consistent with each other: new starters get Snipe-IT users, Macs are checked out to the right person, leavers' assets go to *Pending*, and returning staff are restored. It is MIT licensed and deploys to AWS Fargate with Terraform or runs locally and in Docker.
 

@@ -1,8 +1,8 @@
 <div align="center">
 
-<img src="docs/assets/brand/icon.svg" width="96" alt="Jamf-SnipeIT Suite icon: two white arrows pointing in opposite directions on a purple tile">
+<img src="docs/assets/brand/icon.svg" width="96" alt="Jamf-Snipe-IT Suite icon: two white arrows pointing in opposite directions on a purple tile">
 
-# 🔄 Jamf-SnipeIT Suite
+# 🔄 Jamf-Snipe-IT Suite
 
 **Keep your Macs in Jamf Pro and your assets in Snipe-IT matched to the right people on a schedule: starters, leavers and rehires, with a dry run before every change**
 
@@ -21,9 +21,9 @@
 
 People join, leave, change surname, move from contract to permanent, and sometimes come back the day after being offboarded. Each change touches Jamf Pro (devices), Snipe-IT (the asset register), Azure AD (identity) and HiBob (HR). When the four drift apart you get laptops nobody can find, ghost users and wrong audit answers, and the fix is an afternoon of spreadsheets.
 
-Jamf-SnipeIT Suite runs those checks for you. Each job reads the systems, decides what is out of step, and either fixes it or, when a person should decide, posts it to Slack. Every command that changes data has `--dry-run`.
+Jamf-Snipe-IT Suite runs those checks for you. Each job reads the systems, decides what is out of step, and either fixes it or, when a person should decide, posts it to Slack. Every command that changes data has `--dry-run`.
 
-| | Jamf-SnipeIT Suite | Doing it by hand | A one-off script per system |
+| | Jamf-Snipe-IT Suite | Doing it by hand | A one-off script per system |
 |---|---|---|---|
 | New starters in Snipe-IT | Created from an Azure AD group on a schedule | Typed in | Only if you write the loop |
 | Mac to owner | Six matching steps, manual overrides last | Read the local account, search, check out | Usually one exact match |

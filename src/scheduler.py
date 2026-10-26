@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Jamf-SnipeIT Suite - Scheduler
+Jamf-Snipe-IT Suite - Scheduler
 APScheduler-based task scheduler for automated module execution.
 """
 import argparse
@@ -218,7 +218,7 @@ def create_scheduler(config: Config, dry_run: bool = False) -> Any:
 def main():
     """Main entry point for scheduler."""
     parser = argparse.ArgumentParser(
-        description='Jamf-SnipeIT Suite - Scheduled Task Runner'
+        description='Jamf-Snipe-IT Suite - Scheduled Task Runner'
     )
     parser.add_argument('--config', '-c', default='config/config.yaml',
                         help='Path to configuration file')
@@ -242,7 +242,7 @@ def main():
     
     print("""
 ╔═══════════════════════════════════════════════════════════╗
-║            Jamf-SnipeIT Suite - Scheduler                 ║
+║            Jamf-Snipe-IT Suite - Scheduler                ║
 ║              Automated Task Execution                     ║
 ╚═══════════════════════════════════════════════════════════╝
     """)

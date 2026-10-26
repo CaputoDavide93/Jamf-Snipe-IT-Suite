@@ -1,5 +1,5 @@
 """
-Jamf-SnipeIT Suite - Peripherals Sync Module
+Jamf-Snipe-IT Suite - Peripherals Sync Module
 Syncs employee equipment data from HiBob → Snipe-IT accessories.
 
 Pipeline:

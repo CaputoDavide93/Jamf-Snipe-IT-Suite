@@ -1,5 +1,5 @@
 """
-Jamf-SnipeIT Suite - Rehire Detection Module
+Jamf-Snipe-IT Suite - Rehire Detection Module
 
 Reverses the one-way [Disabled] tagging performed by the Leavers module.
 

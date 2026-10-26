@@ -1,5 +1,5 @@
 """
-Jamf-SnipeIT Suite - Wake-Up Module
+Jamf-Snipe-IT Suite - Wake-Up Module
 Sends MDM redeploy commands to wake up Jamf computers.
 """
 import logging

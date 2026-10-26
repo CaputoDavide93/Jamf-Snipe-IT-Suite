@@ -1,5 +1,5 @@
 """
-Jamf-SnipeIT Suite - Sync State & Retry Queue
+Jamf-Snipe-IT Suite - Sync State & Retry Queue
 Persists last-run timestamps and a dead-letter queue for failed operations.
 """
 import json

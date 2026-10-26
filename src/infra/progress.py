@@ -1,5 +1,5 @@
 """
-Jamf-SnipeIT Suite - Progress Tracker
+Jamf-Snipe-IT Suite - Progress Tracker
 Lightweight logger-based progress reporting with visual bar.
 """
 import logging

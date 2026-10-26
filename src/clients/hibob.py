@@ -1,5 +1,5 @@
 """
-Jamf-SnipeIT Suite - HiBob API Client
+Jamf-Snipe-IT Suite - HiBob API Client
 Read-only client for extracting employee equipment data from HiBob.
 """
 import base64
