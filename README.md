@@ -11,7 +11,7 @@
 ![AWS Fargate](https://img.shields.io/badge/AWS-Fargate-FF9900?logo=amazonwebservices&logoColor=white)
 ![Terraform](https://img.shields.io/badge/Terraform-IaC-844FBA?logo=terraform&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green)
-[![CI](https://github.com/CaputoDavide93/Jamf-SnipeIT-Suite/actions/workflows/ci.yml/badge.svg)](https://github.com/CaputoDavide93/Jamf-SnipeIT-Suite/actions/workflows/ci.yml)
+[![CI](https://github.com/CaputoDavide93/Jamf-Snipe-IT-Suite/actions/workflows/ci.yml/badge.svg)](https://github.com/CaputoDavide93/Jamf-Snipe-IT-Suite/actions/workflows/ci.yml)
 
 </div>
 
@@ -44,7 +44,7 @@ You need Python 3.12 or newer (or Docker), a Jamf Pro account that can read comp
 1. **Get the code.**
 
    ```bash
-   git clone https://github.com/CaputoDavide93/Jamf-SnipeIT-Suite.git && cd Jamf-SnipeIT-Suite
+   git clone https://github.com/CaputoDavide93/Jamf-Snipe-IT-Suite.git && cd Jamf-Snipe-IT-Suite
    python3 -m venv venv && source venv/bin/activate && pip install -r requirements.txt
    ```
 
@@ -112,14 +112,14 @@ Every rule starts the same task definition. The command each rule passes decides
 | Jamf Pro and Snipe-IT versions | Not recorded |
 | Docker image on AWS Fargate | Described in the [runbook](docs/operations.md); the image build is not run in CI |
 
-Used it on a setup not listed? Open an [issue](https://github.com/CaputoDavide93/Jamf-SnipeIT-Suite/issues) with the product versions, the command and the log lines around any error. Replace real names, serial numbers, hostnames and addresses (use `192.0.2.x`) and never paste tokens.
+Used it on a setup not listed? Open an [issue](https://github.com/CaputoDavide93/Jamf-Snipe-IT-Suite/issues) with the product versions, the command and the log lines around any error. Replace real names, serial numbers, hostnames and addresses (use `192.0.2.x`) and never paste tokens.
 
 ---
 
 ## 📁 Repo structure
 
 ```text
-Jamf-SnipeIT-Suite/
+Jamf-Snipe-IT-Suite/
 ├── src/
 │   ├── clients/            # 🔌 Retrying API clients: jamf, snipeit, azure, hibob, slack
 │   ├── core/               # ⚙️ Config schema, client factory, run context, sync state

@@ -7,8 +7,8 @@ You need Python 3.12 or newer (or Docker), a Jamf Pro account that can read comp
 ## 1. Get the code
 
 ```bash
-git clone https://github.com/CaputoDavide93/Jamf-SnipeIT-Suite.git
-cd Jamf-SnipeIT-Suite
+git clone https://github.com/CaputoDavide93/Jamf-Snipe-IT-Suite.git
+cd Jamf-Snipe-IT-Suite
 python3 -m venv venv && source venv/bin/activate
 pip install -r requirements.txt
 ```

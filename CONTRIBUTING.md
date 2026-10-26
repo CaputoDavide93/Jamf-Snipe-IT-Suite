@@ -33,8 +33,8 @@ This project adheres to a Code of Conduct. By participating, you are expected to
 
 1. **Fork and clone the repository**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/Jamf-SnipeIT-Suite.git
-   cd Jamf-SnipeIT-Suite
+   git clone https://github.com/YOUR_USERNAME/Jamf-Snipe-IT-Suite.git
+   cd Jamf-Snipe-IT-Suite
    ```
 
 2. **Create a virtual environment**
@@ -196,7 +196,7 @@ See [SECURITY.md](SECURITY.md) for full security guidelines.
 ## 📁 Project Structure
 
 ```text
-Jamf-SnipeIT-Suite/
+Jamf-Snipe-IT-Suite/
 ├── src/
 │   ├── clients/        # API clients (jamf, snipeit, azure, hibob, slack)
 │   ├── core/           # Config schema, client factory, run context, state
