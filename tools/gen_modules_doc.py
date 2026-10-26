@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate the CLI command inventory table in README.md.
+"""Generate the CLI command inventory table in docs/modules.md.
 
 Source of truth:
   - src/main.py            -> subparser registrations (command name + help text)
@@ -7,10 +7,10 @@ Source of truth:
                               only via `run-group`, e.g. monthly-digest)
   - src/docker_scheduler.py -> default cron per scheduled job
 
-The table is written between <!-- AUTOGEN:modules --> markers in README.md.
+The table is written between <!-- AUTOGEN:modules --> markers in docs/modules.md.
 
 Usage:
-  python tools/gen_modules_doc.py           # regenerate README table
+  python tools/gen_modules_doc.py           # regenerate the table in docs/modules.md
   python tools/gen_modules_doc.py --check   # exit 1 if the table is stale
 """
 
@@ -23,7 +23,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 MAIN = ROOT / "src" / "main.py"
 SCHEDULER = ROOT / "src" / "docker_scheduler.py"
-README = ROOT / "README.md"
+README = ROOT / "docs" / "modules.md"
 
 START = "<!-- AUTOGEN:modules -->"
 END = "<!-- /AUTOGEN:modules -->"
@@ -93,12 +93,12 @@ def build_table() -> str:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true",
-                        help="Fail (exit 1) if README table is out of date")
+                        help="Fail (exit 1) if the table is out of date")
     args = parser.parse_args()
 
     readme = README.read_text()
     if START not in readme or END not in readme:
-        print(f"ERROR: {START} markers not found in README.md", file=sys.stderr)
+        print(f"ERROR: {START} markers not found in docs/modules.md", file=sys.stderr)
         return 2
 
     table = build_table()
@@ -107,14 +107,14 @@ def main() -> int:
 
     if args.check:
         if new_readme != readme:
-            print("STALE: README module table does not match src/main.py — "
+            print("STALE: module table in docs/modules.md does not match src/main.py — "
                   "run `python tools/gen_modules_doc.py`", file=sys.stderr)
             return 1
-        print("OK: README module table is up to date")
+        print("OK: module table in docs/modules.md is up to date")
         return 0
 
     README.write_text(new_readme)
-    print("README.md module table regenerated")
+    print("docs/modules.md table regenerated")
     return 0
 
 
