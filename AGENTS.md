@@ -1,35 +1,56 @@
 # Agent instructions
 
-This repository follows Davide Caputo's house standards. The full spec is
-[`reference/STYLE.md` in Repo-Standards](https://github.com/CaputoDavide93/Repo-Standards/blob/main/reference/STYLE.md)
-(private). When this summary and the spec disagree, the spec wins.
+Jamf-Snipe-IT-Suite keeps Jamf Pro, Snipe-IT, Azure AD and HiBob consistent: starters, leavers, rehires, Mac-to-owner matching, with `--dry-run` on every command that writes. It runs from a terminal, in Docker or on AWS Fargate. It also contains the `wakeup` module that replaced the Jamf-WakeUp-Call repo.
 
-## Rules that apply to every change
+## Commands
 
-- **Documentation never lies.** Every command, flag, feature, count and badge must be true of the code. Verify before writing; delete what you can't verify. No hand-typed counts that can drift.
-- **Commits:** conventional (`fix:`, `feat:`, `docs:`, `refactor:`, `ci:`, `chore:`), authored by the repo owner. **Never** add `Co-Authored-By`, `Claude-Session`, "Generated with …" or any other AI attribution — not in commits, PR bodies, issues or comments.
-- **Never** force-push the default branch, commit secrets, or change runtime identifiers (env var names, container/image names, bundle IDs, entity IDs, public URLs) as a side effect.
-- Run the repo's own checks (tests, lint, build, `python3 tools/gen_diagram.py --check`) before and after; anything green before stays green.
+```bash
+make venv                                 # .venv from requirements.lock.txt, plus pytest and ruff
+make check                                # what CI runs: ruff, pytest, inventory, diagram, icon checks
+make inventory                            # regenerate the command table in docs/modules.md
+make diagram                              # redraw docs/assets/*.svg after editing tools/gen_diagram.py
+python src/main.py --help                 # CLI, run from the repo root
+python src/main.py model-sync --check-only
+```
 
-## README
+Run `make check` before and after every change; anything green before stays green. CI also runs `terraform fmt -check -recursive terraform/` and `terraform validate` in `terraform/environments/prod`; `make check` does not.
 
-- Centered header: one emoji H1 (the same emoji as the GitHub description), a **bold** one-line tagline, flat shields.io badges (tech → platform → license → live CI; no `style=`), then `---`.
-- Emoji `##` headings in the canonical order, `---` between sections, features as an emoji-lead table, a repo tree in a ` ```text ` block that matches `git ls-files`.
-- `## 🗺️ Architecture` opens with the house-kit diagram: `tools/gen_diagram.py` writes `docs/assets/architecture-{light,dark}.svg`, embedded with `<picture>` (dark `<source>` + light `<img width="100%">` + a one-sentence alt). No Mermaid for architecture, no ASCII boxes.
-- Screenshots live in `docs/assets/screenshots/<screen>-{light,dark}.png`; public repos use demo data only.
-- The README ends with `---` and then exactly:
-  `<p align="center"><sub>Made with ❤️ by <a href="https://github.com/CaputoDavide93">Davide Caputo</a></sub></p>`
-  (translated only when the README body is in another language). No star request, no extra lines.
+## Layout
 
-## Layout and naming
+| Path | Holds |
+|---|---|
+| `src/main.py` | CLI: subcommands and the interactive menu |
+| `src/docker_scheduler.py` | Container entry point: cron scheduler and health endpoint |
+| `src/clients/` | Retrying API clients (Jamf, Snipe-IT, Azure, HiBob, Slack) |
+| `src/core/` | Config schema, client factory, run context, sync state |
+| `src/matching/` | User matching score engine and the optional AI resolver |
+| `src/infra/` | Run mutex, health server, audit CSV, helpers |
+| `src/modules/` | `lifecycle/`, `sync/`, `maintenance/`: one class per command |
+| `config/` | `config.example.yaml`, `equipment_mapping.json` |
+| `terraform/` | ECS, ECR, EventBridge, SSM, IAM, alerts |
+| `scripts/` | `deploy.sh`, `verify-image.sh`, `docker-entrypoint.sh` (touch live systems) |
+| `tools/` | Generators: `gen_diagram.py`, `gen_modules_doc.py`, `brand/`, `screenshots/` |
+| `tests/` | pytest; every external service is mocked |
+| `docs/` | Index in `docs/README.md`; `docs/modules.md` has a generated table |
 
-- Directories `lowercase-kebab`; docs `docs/lowercase-kebab.md`; shell scripts `kebab-case.sh`; Python `snake_case`; TS/JS modules `kebab-case`, React components `PascalCase.tsx`. Toolchain rules win (Xcode targets, HA `custom_components/<domain>`, Python import names, Kotlin packages, ESPHome/HA `.yaml`).
-- Root holds only README, LICENSE, SECURITY, CONTRIBUTING, CHANGELOG, AGENTS, CLAUDE (`.md`) plus config files. Code in `src/` (or the toolchain's dir), tests in `tests/`, `scripts/` for things that touch live systems, `tools/` for repo generators, `config/` for samples, docs in `docs/` with `docs/README.md` once there are more than five, superseded material in `docs/archive/YYYY/`.
-- One `.env.example` with every variable the code reads (obviously fake placeholders). Examples are `<name>.example.<ext>`.
+## Conventions
 
-<!-- ── repo-specific notes below this line ─────────────────────────────── -->
+- Python `snake_case`, directories `lowercase-kebab`, shell scripts `kebab-case.sh`, docs `docs/lowercase-kebab.md`.
+- Root holds only README, LICENSE, SECURITY, CONTRIBUTING, CHANGELOG, AGENTS (`.md`) plus config files.
+- Commits are conventional (`fix:`, `feat:`, `docs:`, `refactor:`, `ci:`, `chore:`) and authored by the repo owner. No co-author trailers, session ids or "generated by" lines in commits, PRs, issues or comments.
+- Documentation must be true of the code: verify every command, flag and badge, and do not type counts by hand. The command table in `docs/modules.md` and the SVGs are generated; edit the generator, not the output.
+- Screenshots come from `make screenshots` (the real CLI against `tools/screenshots/mock_services.py`). Retake them when CLI output changes.
+- The README ends with the author footer line and nothing after it.
+- Anything that needs a live Jamf Pro, Snipe-IT, Azure AD or HiBob tenant is unverified unless it was run against one; say so in the docs.
 
-- Run `make check` (ruff, pytest, `tools/gen_modules_doc.py --check`, `python3 tools/gen_diagram.py --check`, `sh tools/brand/check-icon.sh`) before and after every change. CI runs the same, plus Terraform fmt and validate.
-- Public repo: demo data only. Use `example.com` hosts, `192.0.2.x` addresses, made-up serials such as `DEMO0000101`, and no real tenant, person or employer names. Docs name the optional AI feature as an external AI service. Never change runtime identifiers (the `CF-####` asset-tag prefix, the Terraform `Owner` tag, env var names) as a side effect of a docs change.
-- The command inventory in `docs/modules.md` is generated; run `make inventory` after changing `src/main.py` or the scheduler.
-- Screenshots come from `make screenshots`: the real CLI against `tools/screenshots/mock_services.py`. Retake them when CLI output changes. Anything that needs a live Jamf Pro, Snipe-IT, Azure AD or HiBob tenant is unverified unless it was run against one; say so in the docs.
+## Do not change
+
+These are runtime identifiers; renaming one breaks running deployments:
+
+- Subcommand names in `src/main.py`; the EventBridge schedules in `terraform/` call them by name.
+- Environment variables: `AI_API_KEY`, `AI_MODEL_ID`, `AI_RESOLVER_MODEL_ID`, `AI_CACHE_PATH`, `AI_CACHE_S3_BUCKET`, `AI_CACHE_S3_KEY`, `HEALTH_AUTH_TOKEN`, `LOG_JSON`, `MUTEX_DISABLED`, `MUTEX_LOCK_PARAM`, `MUTEX_LOCK_REFRESH_SEC`, and the keys of `config/config.example.yaml`.
+- The `CF-####` asset-tag format, the `/healthz` endpoint on port 8080, the Terraform module and resource names (`jamf-snipeit-suite`), and the Terraform `Owner` tag.
+
+## Secrets and demo data
+
+Never commit secrets, keys, tokens, IP addresses, private hostnames or personal e-mail addresses. `config/config.yaml`, `.env` and `config/user_overrides.json` are gitignored and stay that way. The repo is public: use demo data only (`example.com` hosts, `192.0.2.x` addresses, made-up serials such as `DEMO0000101`) and no real tenant, person or employer names. Vulnerabilities go through GitHub Security Advisories (see `SECURITY.md`).
