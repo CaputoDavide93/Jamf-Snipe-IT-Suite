@@ -248,7 +248,7 @@ def architecture(scheme):
          "box", "pull :latest", "in"),
         ("SSM Parameter Store", ["API secrets as SecureString", "and the RunMutex lock"],
          "key", "secrets, RunMutex", "both"),
-        ("S3 AI cache", ["ai-resolver-cache.json,", "survives Fargate restarts"],
+        ("S3 AI Cache", ["ai-resolver-cache.json,", "survives Fargate restarts"],
          "bucket", "AI decisions", "both"),
         ("CloudWatch + SNS", ["container logs; failed or", "unlaunched runs alert"],
          "bell", "logs, exit status", "out"),
@@ -279,7 +279,7 @@ def architecture(scheme):
               k.edge([b, a] if way == "in" else [a, b], label=label, both=way == "both"))
 
     # The task: the one thing that runs, with the module set RUN_MODE picks from.
-    k.add(k.box(tx, ty, W, th, "ECS Fargate task",
+    k.add(k.box(tx, ty, W, th, "ECS Fargate Task",
                 ["linux/amd64, read-only root fs,", "every job holds the RunMutex"],
                 icon="server", tone="accent"))
     y = ty + 118
@@ -321,12 +321,12 @@ def lifecycle(scheme):
     top, th = 64, 84
     mid = top + th / 2
     k.add(
-        k.box(cols[0], top, ws[0], th, "New hire", ["azure-starters creates", "the Snipe-IT user"],
+        k.box(cols[0], top, ws[0], th, "New Hire", ["azure-starters creates", "the Snipe-IT user"],
               icon="user_plus"),
         k.box(cols[1], top, ws[1], th, "Active", ["assets checked out", "by user-match"], icon="user"),
         k.box(cols[2], top, ws[2], th, "[Disabled]", ["leavers tags the name,", "assets set to Pending"],
               icon="user_x"),
-        k.box(cols[3], top, ws[3], th, "Kept for audit", ["never deleted"], icon="archive",
+        k.box(cols[3], top, ws[3], th, "Kept for Audit", ["never deleted"], icon="archive",
               tone="soft"),
         k.edge([(cols[0] + ws[0] + 8, mid), (cols[1] - 8, mid)]),
         k.edge([(cols[1] + ws[1] + 8, mid), (cols[2] - 8, mid)], label="leaves"),
@@ -336,7 +336,7 @@ def lifecycle(scheme):
     ry, rh = 236, 124
     rmid = ry + rh / 2
     k.add(
-        k.box(cols[2], ry, ws[2], rh, "Rehire detection",
+        k.box(cols[2], ry, ws[2], rh, "Rehire Detection",
               ["Azure AD account enabled", "not in leavers or disabled group",
                "no leave date in the past", "HiBob lists them as active"],
               icon="refresh", tone="accent"),
