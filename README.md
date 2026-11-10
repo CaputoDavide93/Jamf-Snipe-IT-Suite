@@ -105,7 +105,7 @@ Every rule starts the same task definition. The command each rule passes decides
 
 | Area | Status |
 |------|--------|
-| Python 3.12 on Linux | Tested in CI: ruff, the pytest suite, the generated command table, the diagrams and the icon |
+| Python 3.15 on Linux | Tested in CI: ruff, the pytest suite, the generated command table, the diagrams, the icon and a Docker image build |
 | Python 3.14 on macOS | Tested: the test suite, and `model-sync` against a local mock of Jamf Pro and Snipe-IT with made-up devices (the screenshots) |
 | Terraform | `fmt -check` and `validate` run in CI; an apply is not verified here |
 | Live Jamf Pro, Snipe-IT, Azure AD, HiBob, Slack | Unverified in this documentation pass; tests and screenshots use mocks |

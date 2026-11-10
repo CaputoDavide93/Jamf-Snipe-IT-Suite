@@ -4,7 +4,7 @@
 
 Key facts:
 
-- Tested on: Python 3.12 on Linux in CI (ruff, the pytest suite, a generated-docs check, a diagram check and Terraform fmt and validate) and Python 3.14 on macOS (the test suite, and the model-sync command against a local mock of Jamf Pro and Snipe-IT with made-up devices).
+- Tested on: Python 3.15 on Linux in CI (ruff, the pytest suite, a generated-docs check, a diagram check, a Docker image build and Terraform fmt and validate) and Python 3.14 on macOS (the test suite, and the model-sync command against a local mock of Jamf Pro and Snipe-IT with made-up devices).
 - Not verified: live Jamf Pro, Snipe-IT, Azure AD, HiBob and Slack accounts in the documentation pass, any particular version of those products, a Docker image build in CI, and a Terraform apply. The tests and screenshots use mocks.
 - Install: `git clone https://github.com/CaputoDavide93/Jamf-Snipe-IT-Suite.git`, create a virtual environment, `pip install -r requirements.txt`, copy `config/config.example.yaml` to `config/config.yaml` and fill in the Jamf Pro and Snipe-IT sections.
 - First run: `python src/main.py model-sync --check-only` lists hardware models missing from Snipe-IT and changes nothing. `python src/main.py model-sync --dry-run` previews the changes.
